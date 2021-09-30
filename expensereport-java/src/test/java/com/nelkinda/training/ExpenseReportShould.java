@@ -6,6 +6,7 @@ import org.approvaltests.reporters.UseReporter;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
+import java.util.Date;
 import java.util.List;
 
 @UseReporter(IdeaReporter.class)
@@ -13,7 +14,12 @@ class ExpenseReportShould {
     @Test
     void name() {
         ByteArrayOutputStream outputStream = new ApprovalUtilities().writeSystemOutToStringBuffer();
-        ExpenseReport report = new ExpenseReport();
+        ExpenseReport report = new ExpenseReport() {
+            @Override
+            protected Date now() {
+                return new Date(0);
+            }
+        };
         report.printReport(List.of());
         Approvals.verify(outputStream);
     }
