@@ -27,6 +27,15 @@ class ExpenseReportCharacter {
         );
     }
 
+    @Test
+    public void manyExpenses() {
+        ByteArrayOutputStream output = printExpenses(List.of(
+            createExpense(ExpenseType.CAR_RENTAL, 1000),
+            createExpense(ExpenseType.BREAKFAST, 3000)
+        ));
+        Approvals.verify(output);
+    }
+
     private ByteArrayOutputStream printSingleExpense(ExpenseType carRental, int amount) {
         Expense expense = createExpense(carRental, amount);
         return printExpenses(List.of(expense));
