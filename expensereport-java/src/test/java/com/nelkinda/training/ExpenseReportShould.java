@@ -2,6 +2,7 @@ package com.nelkinda.training;
 
 import org.approvaltests.ApprovalUtilities;
 import org.approvaltests.Approvals;
+import org.approvaltests.combinations.CombinationApprovals;
 import org.approvaltests.reporters.UseReporter;
 import org.junit.jupiter.api.Test;
 
@@ -18,9 +19,12 @@ class ExpenseReportCharacter {
     }
 
     @Test
-    void carRental_500() {
-        ByteArrayOutputStream output = printSingleExpense(ExpenseType.CAR_RENTAL, 500);
-        Approvals.verify(output);
+    void singleExpenses() {
+        CombinationApprovals.verifyAllCombinations(
+            this::printSingleExpense,
+            ExpenseType.values(),
+            new Integer[]{-1, 0, 500, 999, 1000, 1001, 4999, 5000, 5001, 10000}
+        );
     }
 
     private ByteArrayOutputStream printSingleExpense(ExpenseType carRental, int amount) {
