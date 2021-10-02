@@ -5,7 +5,7 @@ public class ReportLineData {
     private final int amount;
     private final boolean isMealOverExpenses;
 
-    public ReportLineData(String expenseName, int amount, boolean isMealOverExpenses) {
+    ReportLineData(String expenseName, int amount, boolean isMealOverExpenses) {
         this.expenseName = expenseName;
         this.amount = amount;
         this.isMealOverExpenses = isMealOverExpenses;

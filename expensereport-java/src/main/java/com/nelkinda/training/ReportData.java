@@ -7,7 +7,7 @@ public class ReportData {
     private final int mealExpenses;
     private final int total;
 
-    public ReportData(List<ReportLineData> lines, int mealExpenses, int total) {
+    ReportData(List<ReportLineData> lines, int mealExpenses, int total) {
         this.lines = lines;
         this.mealExpenses = mealExpenses;
         this.total = total;
