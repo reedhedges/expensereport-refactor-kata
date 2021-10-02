@@ -1,6 +1,7 @@
 package com.nelkinda.training;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -11,13 +12,71 @@ enum ExpenseType {
 class Expense {
     ExpenseType type;
     int amount;
+
+    boolean isMeal() {
+        return type == ExpenseType.DINNER || type == ExpenseType.BREAKFAST;
+    }
+
+    String mealOverExpensesMarker() {
+        return type == ExpenseType.DINNER && amount > 5000
+            || type == ExpenseType.BREAKFAST && amount > 1000
+            ? "X"
+            : " ";
+    }
+
+    String expenseName() {
+        return switch (type) {
+            case DINNER -> "Dinner";
+            case BREAKFAST -> "Breakfast";
+            case CAR_RENTAL -> "Car Rental";
+        };
+    }
+}
+
+class Expenses extends ArrayList<Expense> {
+
+    public Expenses() {
+    }
+
+    public Expenses(Collection<? extends Expense> c) {
+        super(c);
+    }
+
+    int mealExpenses() {
+        int mealExpenses = 0;
+        for (Expense expense : this) {
+            if (expense.isMeal()) {
+                mealExpenses += expense.amount;
+            }
+        }
+        return mealExpenses;
+    }
+
+    int total() {
+        int total = 0;
+        for (Expense expense : this) {
+            total += expense.amount;
+        }
+        return total;
+    }
+
+    List<ReportLineData> reportLines() {
+        List<ReportLineData> lines = new ArrayList<>();
+        for (Expense expense : this) {
+            String expenseName = expense.expenseName();
+            String mealOverExpensesMarker = expense.mealOverExpensesMarker();
+            ReportLineData line = new ReportLineData(expenseName, expense.amount, mealOverExpensesMarker);
+            lines.add(line);
+        }
+        return lines;
+    }
 }
 
 public class ExpenseReport {
-    public void printReport(List<Expense> expenses) {
-        List<ReportLineData> lines = reportLines(expenses);
-        int mealExpenses = mealExpenses(expenses);
-        int total = total(expenses);
+    public void printReport(Expenses expenses) {
+        List<ReportLineData> lines = expenses.reportLines();
+        int mealExpenses = expenses.mealExpenses();
+        int total = expenses.total();
         ReportData reportData = new ReportData(lines, mealExpenses, total);
 
         print(reportData);
@@ -30,54 +89,6 @@ public class ExpenseReport {
         }
         System.out.println("Meal expenses: " + reportData.getMealExpenses());
         System.out.println("Total expenses: " + reportData.getTotal());
-    }
-
-    private List<ReportLineData> reportLines(List<Expense> expenses) {
-        List<ReportLineData> lines = new ArrayList<>();
-        for (Expense expense : expenses) {
-            String expenseName = expenseName(expense);
-            String mealOverExpensesMarker = mealOverExpensesMarker(expense);
-            ReportLineData line = new ReportLineData(expenseName, expense.amount, mealOverExpensesMarker);
-            lines.add(line);
-        }
-        return lines;
-    }
-
-    private int mealExpenses(List<Expense> expenses) {
-        int mealExpenses = 0;
-        for (Expense expense : expenses) {
-            if (isMeal(expense)) {
-                mealExpenses += expense.amount;
-            }
-        }
-        return mealExpenses;
-    }
-
-    private int total(List<Expense> expenses) {
-        int total = 0;
-        for (Expense expense : expenses) {
-            total += expense.amount;
-        }
-        return total;
-    }
-
-    private String mealOverExpensesMarker(Expense expense) {
-        return expense.type == ExpenseType.DINNER && expense.amount > 5000
-            || expense.type == ExpenseType.BREAKFAST && expense.amount > 1000
-            ? "X"
-            : " ";
-    }
-
-    private String expenseName(Expense expense) {
-        return switch (expense.type) {
-            case DINNER -> "Dinner";
-            case BREAKFAST -> "Breakfast";
-            case CAR_RENTAL -> "Car Rental";
-        };
-    }
-
-    private boolean isMeal(Expense expense) {
-        return expense.type == ExpenseType.DINNER || expense.type == ExpenseType.BREAKFAST;
     }
 
     protected Date now() {

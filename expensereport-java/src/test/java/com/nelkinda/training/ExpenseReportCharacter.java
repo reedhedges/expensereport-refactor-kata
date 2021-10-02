@@ -14,7 +14,7 @@ import java.util.List;
 class ExpenseReportCharacter {
     @Test
     void noExpenses() {
-        ByteArrayOutputStream output = printExpenses(List.of());
+        ByteArrayOutputStream output = printExpenses(new Expenses());
         Approvals.verify(output);
     }
 
@@ -29,16 +29,16 @@ class ExpenseReportCharacter {
 
     @Test
     public void manyExpenses() {
-        ByteArrayOutputStream output = printExpenses(List.of(
+        ByteArrayOutputStream output = printExpenses(new Expenses(List.of(
             createExpense(ExpenseType.CAR_RENTAL, 1000),
             createExpense(ExpenseType.BREAKFAST, 3000)
-        ));
+        )));
         Approvals.verify(output);
     }
 
     private ByteArrayOutputStream printSingleExpense(ExpenseType carRental, int amount) {
         Expense expense = createExpense(carRental, amount);
-        return printExpenses(List.of(expense));
+        return printExpenses(new Expenses(List.of(expense)));
     }
 
     private Expense createExpense(ExpenseType type, int amount) {
@@ -48,7 +48,7 @@ class ExpenseReportCharacter {
         return expense;
     }
 
-    private ByteArrayOutputStream printExpenses(List<Expense> expenses) {
+    private ByteArrayOutputStream printExpenses(Expenses expenses) {
         ByteArrayOutputStream output = new ApprovalUtilities().writeSystemOutToStringBuffer();
         ExpenseReport report = new ExpenseReport() {
             @Override
