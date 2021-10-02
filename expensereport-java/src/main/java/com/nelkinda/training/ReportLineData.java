@@ -1,11 +1,11 @@
 package com.nelkinda.training;
 
-public class ExpenseReportLine {
+public class ReportLineData {
     private final String expenseName;
     private final int amount;
     private final String mealOverExpensesMarker;
 
-    public ExpenseReportLine(String expenseName, int amount, String mealOverExpensesMarker) {
+    public ReportLineData(String expenseName, int amount, String mealOverExpensesMarker) {
         this.expenseName = expenseName;
         this.amount = amount;
         this.mealOverExpensesMarker = mealOverExpensesMarker;

@@ -15,29 +15,29 @@ class Expense {
 
 public class ExpenseReport {
     public void printReport(List<Expense> expenses) {
-        System.out.println("Expenses " + now());
-
-        List<ExpenseReportLine> lines = reportLines(expenses);
+        List<ReportLineData> lines = reportLines(expenses);
         int mealExpenses = mealExpenses(expenses);
         int total = total(expenses);
+        ReportData reportData = new ReportData(lines, mealExpenses, total);
 
-        printLines(lines);
-        System.out.println("Meal expenses: " + mealExpenses);
-        System.out.println("Total expenses: " + total);
+        print(reportData);
     }
 
-    private void printLines(List<ExpenseReportLine> lines) {
-        for (ExpenseReportLine line : lines) {
+    private void print(ReportData reportData) {
+        System.out.println("Expenses " + now());
+        for (ReportLineData line : reportData.getLines()) {
             System.out.println(line.getExpenseName() + "\t" + line.getAmount() + "\t" + line.getMealOverExpensesMarker());
         }
+        System.out.println("Meal expenses: " + reportData.getMealExpenses());
+        System.out.println("Total expenses: " + reportData.getTotal());
     }
 
-    private List<ExpenseReportLine> reportLines(List<Expense> expenses) {
-        List<ExpenseReportLine> lines = new ArrayList<>();
+    private List<ReportLineData> reportLines(List<Expense> expenses) {
+        List<ReportLineData> lines = new ArrayList<>();
         for (Expense expense : expenses) {
             String expenseName = expenseName(expense);
             String mealOverExpensesMarker = mealOverExpensesMarker(expense);
-            ExpenseReportLine line = new ExpenseReportLine(expenseName, expense.amount, mealOverExpensesMarker);
+            ReportLineData line = new ReportLineData(expenseName, expense.amount, mealOverExpensesMarker);
             lines.add(line);
         }
         return lines;
