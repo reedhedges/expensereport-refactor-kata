@@ -1,27 +1,30 @@
 package com.nelkinda.training;
 
 class Expense {
-    ExpenseType type;
+    private final ExpenseType type;
+    public final int amount;
+    private final String name;
 
-    int amount;
+    Expense(ExpenseType type, String name, int amount) {
+        this.type = type;
+        this.name = name;
+        this.amount = amount;
+    }
 
     public static Expense createCarRentalExpense(int amount) {
-        return createExpense(ExpenseType.CAR_RENTAL, amount);
+        return createExpense(ExpenseType.CAR_RENTAL, "Car Rental", amount);
     }
 
     public static Expense createBreakfastExpense(int amount) {
-        return createExpense(ExpenseType.BREAKFAST, amount);
+        return createExpense(ExpenseType.BREAKFAST, "Breakfast", amount);
     }
 
     public static Expense createDinnerExpense(int amount) {
-        return createExpense(ExpenseType.DINNER, amount);
+        return createExpense(ExpenseType.DINNER, "Dinner", amount);
     }
 
-    private static Expense createExpense(ExpenseType type, int amount) {
-        Expense expense = new Expense();
-        expense.type = type;
-        expense.amount = amount;
-        return expense;
+    private static Expense createExpense(ExpenseType type, String name, int amount) {
+        return new Expense(type, name, amount);
     }
 
     public ReportLineData asData() {
@@ -38,16 +41,10 @@ class Expense {
     }
 
     public String name() {
-        return type.name;
+        return name;
     }
 
     private enum ExpenseType {
-        DINNER("Dinner"), BREAKFAST("Breakfast"), CAR_RENTAL("Car Rental");
-                
-        public final String name;
-
-        ExpenseType(String name) {
-            this.name = name;
-        }
+        DINNER, BREAKFAST, CAR_RENTAL;
     }
 }
