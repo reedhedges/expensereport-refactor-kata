@@ -2,7 +2,7 @@ package com.nelkinda.training;
 
 class Expense {
     private final ExpenseType type;
-    public final int amount;
+    private final int amount;
     private final String name;
 
     Expense(ExpenseType type, String name, int amount) {
@@ -28,7 +28,7 @@ class Expense {
     }
 
     public ReportLineData asData() {
-        return new ReportLineData(this.name(), this.amount, this.isOverExpenses());
+        return new ReportLineData(name, amount, this.isOverExpenses());
     }
 
     public boolean isMeal() {
@@ -42,6 +42,10 @@ class Expense {
 
     public String name() {
         return name;
+    }
+
+    public int amount() {
+        return amount;
     }
 
     private enum ExpenseType {

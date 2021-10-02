@@ -22,13 +22,13 @@ class Expenses {
     int mealExpenses() {
         return this.expenses.stream()
             .filter(Expense::isMeal)
-            .mapToInt(expense -> expense.amount)
+            .mapToInt(expense -> expense.amount())
             .sum();
     }
 
     int total() {
         return this.expenses.stream()
-            .mapToInt(expense -> expense.amount)
+            .mapToInt(expense -> expense.amount())
             .sum();
     }
 
