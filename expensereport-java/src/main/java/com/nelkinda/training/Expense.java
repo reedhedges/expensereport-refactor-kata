@@ -38,14 +38,16 @@ class Expense {
     }
 
     public String name() {
-        return switch (type) {
-            case DINNER -> "Dinner";
-            case BREAKFAST -> "Breakfast";
-            case CAR_RENTAL -> "Car Rental";
-        };
+        return type.name;
     }
 
     private enum ExpenseType {
-        DINNER, BREAKFAST, CAR_RENTAL
+        DINNER("Dinner"), BREAKFAST("Breakfast"), CAR_RENTAL("Car Rental");
+                
+        public final String name;
+
+        ExpenseType(String name) {
+            this.name = name;
+        }
     }
 }
