@@ -12,7 +12,7 @@ class Expense {
     }
 
     public static Expense createCarRentalExpense(int amount) {
-        return createExpense(ExpenseType.CAR_RENTAL, "Car Rental", amount);
+        return new UnlimitedExpense("Car Rental", amount);
     }
 
     public static Expense createBreakfastExpense(int amount) {
@@ -48,7 +48,7 @@ class Expense {
         return amount;
     }
 
-    private enum ExpenseType {
-        DINNER, BREAKFAST, CAR_RENTAL;
+    public enum ExpenseType {
+        DINNER, BREAKFAST
     }
 }
