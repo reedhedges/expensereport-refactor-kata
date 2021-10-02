@@ -1,5 +1,6 @@
 package com.nelkinda.training;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -14,20 +15,32 @@ class Expense {
 
 public class ExpenseReport {
     public void printReport(List<Expense> expenses) {
-
         System.out.println("Expenses " + now());
 
+        List<ExpenseReportLine> lines = reportLines(expenses);
+        int mealExpenses = mealExpenses(expenses);
+        int total = total(expenses);
+
+        printLines(lines);
+        System.out.println("Meal expenses: " + mealExpenses);
+        System.out.println("Total expenses: " + total);
+    }
+
+    private void printLines(List<ExpenseReportLine> lines) {
+        for (ExpenseReportLine line : lines) {
+            System.out.println(line.getExpenseName() + "\t" + line.getAmount() + "\t" + line.getMealOverExpensesMarker());
+        }
+    }
+
+    private List<ExpenseReportLine> reportLines(List<Expense> expenses) {
+        List<ExpenseReportLine> lines = new ArrayList<>();
         for (Expense expense : expenses) {
             String expenseName = expenseName(expense);
             String mealOverExpensesMarker = mealOverExpensesMarker(expense);
             ExpenseReportLine line = new ExpenseReportLine(expenseName, expense.amount, mealOverExpensesMarker);
-            System.out.println(line.getExpenseName() + "\t" + line.getAmount() + "\t" + line.getMealOverExpensesMarker());
+            lines.add(line);
         }
-
-        int mealExpenses = mealExpenses(expenses);
-        int total = total(expenses);
-        System.out.println("Meal expenses: " + mealExpenses);
-        System.out.println("Total expenses: " + total);
+        return lines;
     }
 
     private int mealExpenses(List<Expense> expenses) {
