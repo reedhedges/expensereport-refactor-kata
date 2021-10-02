@@ -35,16 +35,19 @@ class Expense {
 
 class Expenses extends ArrayList<Expense> {
 
+    private final List<Expense> expenses;
+    
     public Expenses() {
+        this.expenses = new ArrayList<>();
     }
 
-    public Expenses(Collection<? extends Expense> c) {
-        super(c);
+    public Expenses(List<Expense> expenses) {
+        this.expenses = expenses;
     }
 
     int mealExpenses() {
         int mealExpenses = 0;
-        for (Expense expense : this) {
+        for (Expense expense : this.expenses) {
             if (expense.isMeal()) {
                 mealExpenses += expense.amount;
             }
@@ -54,7 +57,7 @@ class Expenses extends ArrayList<Expense> {
 
     int total() {
         int total = 0;
-        for (Expense expense : this) {
+        for (Expense expense : this.expenses) {
             total += expense.amount;
         }
         return total;
@@ -62,7 +65,7 @@ class Expenses extends ArrayList<Expense> {
 
     List<ReportLineData> reportLines() {
         List<ReportLineData> lines = new ArrayList<>();
-        for (Expense expense : this) {
+        for (Expense expense : this.expenses) {
             String expenseName = expense.expenseName();
             String mealOverExpensesMarker = expense.mealOverExpensesMarker();
             ReportLineData line = new ReportLineData(expenseName, expense.amount, mealOverExpensesMarker);
