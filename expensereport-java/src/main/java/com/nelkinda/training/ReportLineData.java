@@ -3,12 +3,12 @@ package com.nelkinda.training;
 public class ReportLineData {
     private final String expenseName;
     private final int amount;
-    private final String mealOverExpensesMarker;
+    private final boolean isMealOverExpenses;
 
-    public ReportLineData(String expenseName, int amount, String mealOverExpensesMarker) {
+    public ReportLineData(String expenseName, int amount, boolean isMealOverExpenses) {
         this.expenseName = expenseName;
         this.amount = amount;
-        this.mealOverExpensesMarker = mealOverExpensesMarker;
+        this.isMealOverExpenses = isMealOverExpenses;
     }
 
     public String getExpenseName() {
@@ -19,7 +19,7 @@ public class ReportLineData {
         return amount;
     }
 
-    public String getMealOverExpensesMarker() {
-        return mealOverExpensesMarker;
+    public boolean isMealOverExpenses() {
+        return isMealOverExpenses;
     }
 }

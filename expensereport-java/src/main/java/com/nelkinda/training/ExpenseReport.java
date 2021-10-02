@@ -12,7 +12,7 @@ class Expense {
     public static Expense createCarRentalExpense(int amount) {
         return createExpense(ExpenseType.CAR_RENTAL, amount);
     }
-    
+
     public static Expense createBreakfastExpense(int amount) {
         return createExpense(ExpenseType.BREAKFAST, amount);
     }
@@ -32,11 +32,9 @@ class Expense {
         return type == ExpenseType.DINNER || type == ExpenseType.BREAKFAST;
     }
 
-    String mealOverExpensesMarker() {
+    public boolean isMealOverExpenses() {
         return type == ExpenseType.DINNER && amount > 5000
-            || type == ExpenseType.BREAKFAST && amount > 1000
-            ? "X"
-            : " ";
+            || type == ExpenseType.BREAKFAST && amount > 1000;
     }
 
     String expenseName() {
@@ -55,7 +53,7 @@ class Expense {
 class Expenses extends ArrayList<Expense> {
 
     private final List<Expense> expenses;
-    
+
     public Expenses(Expense... expenses) {
         this.expenses = Arrays.asList(expenses);
     }
@@ -89,8 +87,8 @@ class Expenses extends ArrayList<Expense> {
         List<ReportLineData> lines = new ArrayList<>();
         for (Expense expense : this.expenses) {
             String expenseName = expense.expenseName();
-            String mealOverExpensesMarker = expense.mealOverExpensesMarker();
-            ReportLineData line = new ReportLineData(expenseName, expense.amount, mealOverExpensesMarker);
+            String mealOverExpensesMarker = expense.isMealOverExpenses() ? "X" : " ";
+            ReportLineData line = new ReportLineData(expenseName, expense.amount, expense.isMealOverExpenses());
             lines.add(line);
         }
         return lines;
@@ -107,7 +105,11 @@ public class ExpenseReport {
     private void print(ReportData reportData) {
         System.out.println("Expenses " + now());
         for (ReportLineData line : reportData.getLines()) {
-            System.out.println(line.getExpenseName() + "\t" + line.getAmount() + "\t" + line.getMealOverExpensesMarker());
+            System.out.println(
+                line.getExpenseName() + "\t" +
+                    line.getAmount() + "\t" +
+                    (line.isMealOverExpenses() ? "X" : " ")
+            );
         }
         System.out.println("Meal expenses: " + reportData.getMealExpenses());
         System.out.println("Total expenses: " + reportData.getTotal());
