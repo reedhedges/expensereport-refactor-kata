@@ -1,5 +1,10 @@
 Expenses Thu Jan 01 01:00:00 CET 1970
-Car Rental	1000	 
-Breakfast	3000	X
-Meal expenses: 3000
-Total expenses: 4000
+Car Rental	7	 
+Breakfast	0	 
+Breakfast	1	 
+Breakfast	1000	 
+Breakfast	1001	X
+Dinner	5000	 
+Dinner	5001	X
+Meal expenses: 12003
+Total expenses: 12010
