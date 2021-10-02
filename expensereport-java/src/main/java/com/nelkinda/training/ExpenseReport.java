@@ -14,22 +14,17 @@ class Expense {
 
 public class ExpenseReport {
     public void printReport(List<Expense> expenses) {
-        int total = 0;
 
         System.out.println("Expenses " + now());
 
-
         for (Expense expense : expenses) {
             String expenseName = expenseName(expense);
-
             String mealOverExpensesMarker = mealOverExpensesMarker(expense);
-
             System.out.println(expenseName + "\t" + expense.amount + "\t" + mealOverExpensesMarker);
-
-            total += expense.amount;
         }
 
         int mealExpenses = mealExpenses(expenses);
+        int total = total(expenses);
         System.out.println("Meal expenses: " + mealExpenses);
         System.out.println("Total expenses: " + total);
     }
@@ -42,6 +37,14 @@ public class ExpenseReport {
             }
         }
         return mealExpenses;
+    }
+
+    private int total(List<Expense> expenses) {
+        int total = 0;
+        for (Expense expense : expenses) {
+            total += expense.amount;
+        }
+        return total;
     }
 
     private String mealOverExpensesMarker(Expense expense) {
