@@ -5,10 +5,6 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-enum ExpenseType {
-    DINNER, BREAKFAST, CAR_RENTAL
-}
-
 class Expense {
     ExpenseType type;
     int amount;
@@ -30,6 +26,10 @@ class Expense {
             case BREAKFAST -> "Breakfast";
             case CAR_RENTAL -> "Car Rental";
         };
+    }
+
+    enum ExpenseType {
+        DINNER, BREAKFAST, CAR_RENTAL
     }
 }
 

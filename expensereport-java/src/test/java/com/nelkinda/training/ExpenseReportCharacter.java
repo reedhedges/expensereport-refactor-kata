@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.util.Date;
-import java.util.List;
 
 @UseReporter(IdeaReporter.class)
 class ExpenseReportCharacter {
@@ -22,7 +21,7 @@ class ExpenseReportCharacter {
     void singleExpenses() {
         CombinationApprovals.verifyAllCombinations(
             this::printSingleExpense,
-            ExpenseType.values(),
+            Expense.ExpenseType.values(),
             new Integer[]{-1, 0, 500, 999, 1000, 1001, 4999, 5000, 5001, 10000}
         );
     }
@@ -30,18 +29,18 @@ class ExpenseReportCharacter {
     @Test
     public void manyExpenses() {
         ByteArrayOutputStream output = printExpenses(new Expenses(
-            createExpense(ExpenseType.CAR_RENTAL, 1000),
-            createExpense(ExpenseType.BREAKFAST, 3000)
+            createExpense(Expense.ExpenseType.CAR_RENTAL, 1000),
+            createExpense(Expense.ExpenseType.BREAKFAST, 3000)
         ));
         Approvals.verify(output);
     }
 
-    private ByteArrayOutputStream printSingleExpense(ExpenseType carRental, int amount) {
+    private ByteArrayOutputStream printSingleExpense(Expense.ExpenseType carRental, int amount) {
         Expense expense = createExpense(carRental, amount);
         return printExpenses(new Expenses(expense));
     }
 
-    private Expense createExpense(ExpenseType type, int amount) {
+    private Expense createExpense(Expense.ExpenseType type, int amount) {
         Expense expense = new Expense();
         expense.type = type;
         expense.amount = amount;
