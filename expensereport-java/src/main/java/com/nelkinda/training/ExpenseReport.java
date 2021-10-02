@@ -17,6 +17,10 @@ class Expense {
         return createExpense(ExpenseType.BREAKFAST, amount);
     }
 
+    public static Expense createDinnerExpense(int amount) {
+        return createExpense(ExpenseType.DINNER, amount);
+    }
+
     public static Expense createExpense(ExpenseType type, int amount) {
         Expense expense = new Expense();
         expense.type = type;
@@ -43,7 +47,7 @@ class Expense {
         };
     }
 
-    enum ExpenseType {
+    private enum ExpenseType {
         DINNER, BREAKFAST, CAR_RENTAL
     }
 }
