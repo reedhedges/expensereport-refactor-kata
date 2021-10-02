@@ -41,7 +41,7 @@ abstract class Expense {
         return amount;
     }
 
-    public enum ExpenseType {
+    protected enum ExpenseType {
         MEAL, OTHER
     }
 }
