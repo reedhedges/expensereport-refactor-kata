@@ -29,22 +29,15 @@ class ExpenseReportCharacter {
     @Test
     public void manyExpenses() {
         ByteArrayOutputStream output = printExpenses(new Expenses(
-            createExpense(Expense.ExpenseType.CAR_RENTAL, 1000),
-            createExpense(Expense.ExpenseType.BREAKFAST, 3000)
+            Expense.createCarRentalExpense(1000),
+            Expense.createBreakfastExpense(3000)
         ));
         Approvals.verify(output);
     }
 
-    private ByteArrayOutputStream printSingleExpense(Expense.ExpenseType carRental, int amount) {
-        Expense expense = createExpense(carRental, amount);
+    private ByteArrayOutputStream printSingleExpense(Expense.ExpenseType type, int amount) {
+        Expense expense = Expense.createExpense(type, amount);
         return printExpenses(new Expenses(expense));
-    }
-
-    private Expense createExpense(Expense.ExpenseType type, int amount) {
-        Expense expense = new Expense();
-        expense.type = type;
-        expense.amount = amount;
-        return expense;
     }
 
     private ByteArrayOutputStream printExpenses(Expenses expenses) {

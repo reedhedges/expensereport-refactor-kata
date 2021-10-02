@@ -9,6 +9,21 @@ class Expense {
     ExpenseType type;
     int amount;
 
+    public static Expense createCarRentalExpense(int amount) {
+        return createExpense(ExpenseType.CAR_RENTAL, amount);
+    }
+    
+    public static Expense createBreakfastExpense(int amount) {
+        return createExpense(ExpenseType.BREAKFAST, amount);
+    }
+
+    public static Expense createExpense(ExpenseType type, int amount) {
+        Expense expense = new Expense();
+        expense.type = type;
+        expense.amount = amount;
+        return expense;
+    }
+
     boolean isMeal() {
         return type == ExpenseType.DINNER || type == ExpenseType.BREAKFAST;
     }
