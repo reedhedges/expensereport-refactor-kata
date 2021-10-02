@@ -1,6 +1,6 @@
 package com.nelkinda.training;
 
-class Expense {
+abstract class Expense {
     private final ExpenseType type;
     protected final int amount;
     private final String name;
@@ -12,15 +12,15 @@ class Expense {
     }
 
     public static Expense createCarRentalExpense(int amount) {
-        return new UnlimitedExpense("Car Rental", amount);
+        return new UnlimitedExpense(ExpenseType.OTHER, "Car Rental", amount);
     }
 
     public static Expense createBreakfastExpense(int amount) {
-        return new LimitedExpense(ExpenseType.BREAKFAST, "Breakfast", amount, 1000);
+        return new LimitedExpense(ExpenseType.MEAL, "Breakfast", amount, 1000);
     }
 
     public static Expense createDinnerExpense(int amount) {
-        return new LimitedExpense(ExpenseType.DINNER, "Dinner", amount, 5000);
+        return new LimitedExpense(ExpenseType.MEAL, "Dinner", amount, 5000);
     }
 
     public ReportLineData asData() {
@@ -28,13 +28,10 @@ class Expense {
     }
 
     public boolean isMeal() {
-        return type == ExpenseType.DINNER || type == ExpenseType.BREAKFAST;
+        return type == ExpenseType.MEAL;
     }
 
-    public boolean isOverExpenses() {
-        return type == ExpenseType.DINNER && amount > 5000
-            || type == ExpenseType.BREAKFAST && amount > 1000;
-    }
+    abstract public boolean isOverExpenses();
 
     public String name() {
         return name;
@@ -45,6 +42,6 @@ class Expense {
     }
 
     public enum ExpenseType {
-        DINNER, BREAKFAST
+        MEAL, OTHER
     }
 }
