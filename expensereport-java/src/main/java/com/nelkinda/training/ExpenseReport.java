@@ -1,7 +1,7 @@
 package com.nelkinda.training;
 
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -37,12 +37,8 @@ class Expenses extends ArrayList<Expense> {
 
     private final List<Expense> expenses;
     
-    public Expenses() {
-        this.expenses = new ArrayList<>();
-    }
-
-    public Expenses(List<Expense> expenses) {
-        this.expenses = expenses;
+    public Expenses(Expense... expenses) {
+        this.expenses = Arrays.asList(expenses);
     }
 
     int mealExpenses() {
