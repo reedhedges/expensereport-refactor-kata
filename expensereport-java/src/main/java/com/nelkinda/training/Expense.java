@@ -2,7 +2,7 @@ package com.nelkinda.training;
 
 class Expense {
     private final ExpenseType type;
-    private final int amount;
+    protected final int amount;
     private final String name;
 
     Expense(ExpenseType type, String name, int amount) {
@@ -16,15 +16,11 @@ class Expense {
     }
 
     public static Expense createBreakfastExpense(int amount) {
-        return createExpense(ExpenseType.BREAKFAST, "Breakfast", amount);
+        return new LimitedExpense(ExpenseType.BREAKFAST, "Breakfast", amount, 1000);
     }
 
     public static Expense createDinnerExpense(int amount) {
-        return createExpense(ExpenseType.DINNER, "Dinner", amount);
-    }
-
-    private static Expense createExpense(ExpenseType type, String name, int amount) {
-        return new Expense(type, name, amount);
+        return new LimitedExpense(ExpenseType.DINNER, "Dinner", amount, 5000);
     }
 
     public ReportLineData asData() {
