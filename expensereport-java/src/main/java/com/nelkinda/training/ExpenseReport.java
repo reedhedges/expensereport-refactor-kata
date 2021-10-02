@@ -41,6 +41,13 @@ class Expenses extends ArrayList<Expense> {
         this.expenses = Arrays.asList(expenses);
     }
 
+    ReportData reportData() {
+        List<ReportLineData> lines = reportLines();
+        int mealExpenses = mealExpenses();
+        int total = total();
+        return new ReportData(lines, mealExpenses, total);
+    }
+
     int mealExpenses() {
         int mealExpenses = 0;
         for (Expense expense : this.expenses) {
@@ -73,10 +80,7 @@ class Expenses extends ArrayList<Expense> {
 
 public class ExpenseReport {
     public void printReport(Expenses expenses) {
-        List<ReportLineData> lines = expenses.reportLines();
-        int mealExpenses = expenses.mealExpenses();
-        int total = expenses.total();
-        ReportData reportData = new ReportData(lines, mealExpenses, total);
+        ReportData reportData = expenses.reportData();
 
         print(reportData);
     }
