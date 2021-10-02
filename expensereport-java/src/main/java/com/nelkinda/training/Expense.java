@@ -23,6 +23,10 @@ abstract class Expense {
         return new LimitedExpense(ExpenseType.MEAL, "Dinner", amount, 5000);
     }
 
+    public static Expense createLunchExpense(int amount) {
+        return new LimitedExpense(ExpenseType.MEAL, "Lunch", amount, 2000);
+    }
+
     public ReportLineData asData() {
         return new ReportLineData(name, amount, this.isOverExpenses());
     }

@@ -26,7 +26,9 @@ class ExpenseReportCharacter {
             Expense.createBreakfastExpense(1000),
             Expense.createBreakfastExpense(1001),
             Expense.createDinnerExpense(5000),
-            Expense.createDinnerExpense(5001)
+            Expense.createDinnerExpense(5001),
+            Expense.createLunchExpense(2000),
+            Expense.createLunchExpense(2001)
         ));
         Approvals.verify(output);
     }
