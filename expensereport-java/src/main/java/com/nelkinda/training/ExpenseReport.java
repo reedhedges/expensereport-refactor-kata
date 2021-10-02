@@ -20,7 +20,8 @@ public class ExpenseReport {
         for (Expense expense : expenses) {
             String expenseName = expenseName(expense);
             String mealOverExpensesMarker = mealOverExpensesMarker(expense);
-            System.out.println(expenseName + "\t" + expense.amount + "\t" + mealOverExpensesMarker);
+            ExpenseReportLine line = new ExpenseReportLine(expenseName, expense.amount, mealOverExpensesMarker);
+            System.out.println(line.getExpenseName() + "\t" + line.getAmount() + "\t" + line.getMealOverExpensesMarker());
         }
 
         int mealExpenses = mealExpenses(expenses);
