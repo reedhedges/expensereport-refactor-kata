@@ -25,14 +25,14 @@ class Expense {
     }
 
     public ReportLineData asData() {
-        return new ReportLineData(this.name(), this.amount, this.isMealOverExpenses());
+        return new ReportLineData(this.name(), this.amount, this.isOverExpenses());
     }
 
     public boolean isMeal() {
         return type == ExpenseType.DINNER || type == ExpenseType.BREAKFAST;
     }
 
-    public boolean isMealOverExpenses() {
+    public boolean isOverExpenses() {
         return type == ExpenseType.DINNER && amount > 5000
             || type == ExpenseType.BREAKFAST && amount > 1000;
     }
