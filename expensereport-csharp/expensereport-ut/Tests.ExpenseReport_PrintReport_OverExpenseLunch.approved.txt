@@ -1,0 +1,4 @@
+﻿Expenses 01.01.0001 00:00:00
+Lunch	2001	X
+2001
+Total expenses: 2001

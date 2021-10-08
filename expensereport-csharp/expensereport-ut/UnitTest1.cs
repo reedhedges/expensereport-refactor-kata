@@ -37,7 +37,8 @@ namespace Tests
                 {
                     new BreakfastExpense (  1000),
                     new CarRentalExpense (  1),
-                    new DinnerExpense (  5000)
+                    new DinnerExpense (  5000),
+                    new LunchExpense (2000)
                 });
 
             Approvals.Verify(report.Output.ToString());
@@ -87,6 +88,19 @@ namespace Tests
             report.PrintReport(new List<Expense>()
                 {
                     new BreakfastExpense (  1001)
+                });
+
+            Approvals.Verify(report.Output.ToString());
+        }
+
+        [Test]
+        public void ExpenseReport_PrintReport_OverExpenseLunch()
+        {
+            var report = new ExpenseReportFake();
+
+            report.PrintReport(new List<Expense>()
+                {
+                    new LunchExpense (  2001)
                 });
 
             Approvals.Verify(report.Output.ToString());

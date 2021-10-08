@@ -54,6 +54,19 @@ namespace expensereport_csharp
         public override bool isOverexpensed() => this.amount > 1000;
     }
 
+    public class LunchExpense : Expense
+    {
+        public LunchExpense(int amount) : base(amount)
+        {
+        }
+
+        public override string getExpenseName() {
+            return "Lunch";
+        }
+
+        public override bool isOverexpensed() => this.amount > 2000;
+    }
+
     public class CarRentalExpense : Expense
     {
         public CarRentalExpense(int amount) : base(amount)
