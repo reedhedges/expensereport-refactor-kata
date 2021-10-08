@@ -44,6 +44,7 @@ public class ExpenseReport {
 
         System.out.println("Expenses " + date);
 
+
         for (Expense expense : expenses) {
             if (expense.type == ExpenseType.DINNER || expense.type == ExpenseType.BREAKFAST) {
                 mealExpenses += expense.amount;
