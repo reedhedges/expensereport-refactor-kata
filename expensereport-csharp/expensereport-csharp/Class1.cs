@@ -4,6 +4,7 @@ using System.Text;
 
 namespace expensereport_csharp
 {
+    #region models
     public abstract class Expense
     {
         protected Expense(int amount, string name, int expenseLimit = -1)
@@ -56,6 +57,7 @@ namespace expensereport_csharp
 
         public override int getMealExpense() => 0;
     }
+    #endregion
 
     public class ExpenseReport
     {
