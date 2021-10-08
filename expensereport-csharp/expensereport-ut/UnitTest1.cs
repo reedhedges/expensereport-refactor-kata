@@ -35,9 +35,9 @@ namespace Tests
 
             report.PrintReport(new List<Expense>()
                 {
-                    new Expense { amount = 1, type = ExpenseType.BREAKFAST },
+                    new Expense { amount = 1000, type = ExpenseType.BREAKFAST },
                     new Expense { amount = 1, type = ExpenseType.CAR_RENTAL },
-                    new Expense { amount = 1, type = ExpenseType.DINNER }
+                    new Expense { amount = 5000, type = ExpenseType.DINNER }
                 });
 
             Approvals.Verify(report.Output.ToString());
