@@ -63,7 +63,6 @@ public class ExpenseReport {
     }
 
     public void printReport(List<Expense> expenses, Date date) {
-        int total = 0;
         int mealExpenses =  0;
 
         System.out.println("Expenses " + date);
@@ -72,14 +71,19 @@ public class ExpenseReport {
             mealExpenses = calculateMealExpenses(mealExpenses, expense);
 
             String mealOverExpensesMarker = expense.isOverLimit() ? "X" : " ";
-
             System.out.println(expense.getExpenseName() + "\t" + expense.getAmount() + "\t" + mealOverExpensesMarker);
-
-            total += expense.getAmount();
         }
 
         System.out.println("Meal expenses: " + mealExpenses);
-        System.out.println("Total expenses: " + total);
+        System.out.println("Total expenses: " + calculateTotal(expenses));
+    }
+
+    private int calculateTotal(List<Expense> expenses) {
+        int total = 0;
+        for (Expense expense : expenses) {
+            total += expense.getAmount();
+        }
+        return total;
     }
 
     private int calculateMealExpenses(int mealExpenses, Expense expense) {
