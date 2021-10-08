@@ -46,7 +46,7 @@ public class ExpenseReport {
 
         System.out.println("Meal expenses: " + mealExpenses);
         System.out.println("Total expenses: " + total);
-        
+
     }
 
     protected Date currentDate() {

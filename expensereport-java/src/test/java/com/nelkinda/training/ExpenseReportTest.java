@@ -50,10 +50,9 @@ class ExpenseReportTest {
 
         Expense t2 = getExpense(200, ExpenseType.BREAKFAST);
 
+        Expense t3 = getExpense(300, ExpenseType.CAR_RENTAL);
 
-        List<Expense> expenselist = new ArrayList<>();
-        expenselist.add(t);
-        report.printReport(List.of());
+        report.printReport(List.of(t,t2, t3));
 
         // Assert
         Approvals.verify(result);
