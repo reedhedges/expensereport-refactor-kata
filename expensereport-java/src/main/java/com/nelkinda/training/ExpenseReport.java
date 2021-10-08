@@ -7,6 +7,9 @@ interface ExpenseType {
 
     String getDescription();
     String getMealOverExpensesMarker(int amount);
+    default boolean isMealType(){
+        return false;
+    }
 }
 
 enum MealType implements ExpenseType {
@@ -30,6 +33,11 @@ enum MealType implements ExpenseType {
     @Override
     public String getMealOverExpensesMarker(int amount) {
         return amount > getMaxAmount() ? "X" : " ";
+    }
+
+    @Override
+    public boolean isMealType() {
+        return true;
     }
 
     public int getMaxAmount() {
@@ -61,10 +69,6 @@ class Expense {
     ExpenseType type;
     int amount;
 
-    public boolean isMealType() {
-        return type instanceof MealType;
-    }
-
     public String toString() {
         return type.getDescription() + "\t" + amount + "\t" + type.getMealOverExpensesMarker(amount);
     }
@@ -78,9 +82,7 @@ public class ExpenseReport {
         System.out.println("Expenses " + currentDate());
 
         for (Expense expense : expenses) {
-            if (expense.isMealType()) {
-                mealExpenses += expense.amount;
-            }
+            mealExpenses = getMealExpenses(mealExpenses, expense);
             System.out.println(expense);
 
             total += expense.amount;
@@ -89,6 +91,13 @@ public class ExpenseReport {
         System.out.println("Meal expenses: " + mealExpenses);
         System.out.println("Total expenses: " + total);
 
+    }
+
+    private int getMealExpenses(int mealExpenses, Expense expense) {
+        if (expense.type.isMealType()) {
+            mealExpenses += expense.amount;
+        }
+        return mealExpenses;
     }
 
     protected Date currentDate() {

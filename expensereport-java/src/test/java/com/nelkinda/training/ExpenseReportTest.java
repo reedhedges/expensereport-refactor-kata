@@ -2,6 +2,7 @@ package com.nelkinda.training;
 
 import org.approvaltests.ApprovalUtilities;
 import org.approvaltests.Approvals;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
@@ -10,18 +11,24 @@ import java.util.List;
 
 class ExpenseReportTest {
 
-    @Test
-    void testPrintReport_EmptyList() {
+    private ApprovalUtilities au = new ApprovalUtilities();
+    private ByteArrayOutputStream result;
+    private ExpenseReport report;
 
-        // Arrange
-        ApprovalUtilities au = new ApprovalUtilities();
-        ByteArrayOutputStream result = au.writeSystemOutToStringBuffer();
-        ExpenseReport report = new ExpenseReport() {
+    @BeforeEach
+    void setup(){
+         result = au.writeSystemOutToStringBuffer();
+        report = new ExpenseReport() {
             @Override
             protected Date currentDate() {
                 return new Date(0);
             }
         };
+
+    }
+
+    @Test
+    void testPrintReport_EmptyList() {
 
         // Act
         report.printReport(List.of());
@@ -34,29 +41,14 @@ class ExpenseReportTest {
     @Test
     void testPrintReport() {
 
-        // Arrange
-        ApprovalUtilities au = new ApprovalUtilities();
-        ByteArrayOutputStream result = au.writeSystemOutToStringBuffer();
-        ExpenseReport report = new ExpenseReport() {
-            @Override
-            protected Date currentDate() {
-                return new Date(0);
-            }
-        };
-
         // Act
-        Expense t = getExpense(100, MealType.DINNER);
-        Expense tOver = getExpense(5001, MealType.DINNER);
-
-        Expense t2 = getExpense(200, MealType.BREAKFAST);
-        Expense t2Over = getExpense(1001, MealType.BREAKFAST);
-
-        Expense t3 = getExpense(300, OtherExpensesType.CAR_RENTAL);
-
-        Expense t4 = getExpense(50, MealType.LUNCH);
-        Expense t4Over = getExpense(2001, MealType.LUNCH);
-
-        report.printReport(List.of(t, tOver, t2, t2Over, t3, t4, t4Over));
+        report.printReport(List.of(getExpense(100, MealType.DINNER),
+                getExpense(5001, MealType.DINNER),
+                getExpense(200, MealType.BREAKFAST),
+                getExpense(1001, MealType.BREAKFAST),
+                getExpense(300, OtherExpensesType.CAR_RENTAL),
+                getExpense(50, MealType.LUNCH),
+                getExpense(2001, MealType.LUNCH)));
 
         // Assert
         Approvals.verify(result);
