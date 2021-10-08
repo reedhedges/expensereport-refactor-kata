@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
 
 namespace expensereport_csharp
@@ -22,7 +22,7 @@ namespace expensereport_csharp
             int mealExpenses = 0;
 
             Console.WriteLine("Expenses " + DateTime.Now);
-            
+
             foreach (Expense expense in expenses)
             {
                 if (expense.type == ExpenseType.DINNER || expense.type == ExpenseType.BREAKFAST)
