@@ -10,14 +10,15 @@ interface ExpenseType {
 
 enum MealType implements ExpenseType {
     DINNER("Dinner", 5000),
-    BREAKFAST("Breakfast", 1000);
+    BREAKFAST("Breakfast", 1000),
+    LUNCH("Lunch", 2000);
 
     private String description;
-    private int maxAmmount;
+    private int maxAmount;
 
-    MealType(String description, int maxAmmount) {
+    MealType(String description, int maxAmount) {
         this.description = description;
-        this.maxAmmount = maxAmmount;
+        this.maxAmount = maxAmount;
     }
 
     @Override
@@ -25,8 +26,8 @@ enum MealType implements ExpenseType {
         return description;
     }
 
-    public int getMaxAmmount() {
-        return maxAmmount;
+    public int getMaxAmount() {
+        return maxAmount;
     }
 }
 
@@ -49,7 +50,7 @@ class Expense {
     int amount;
 
     public String getMealOverExpensesMarker(){
-        return (type instanceof MealType && amount > ((MealType)type).getMaxAmmount() ) ? "X":" ";
+        return (type instanceof MealType && amount > ((MealType)type).getMaxAmount() ) ? "X":" ";
     }
 }
 

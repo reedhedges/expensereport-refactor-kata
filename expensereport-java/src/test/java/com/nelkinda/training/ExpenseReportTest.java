@@ -53,7 +53,10 @@ class ExpenseReportTest {
 
         Expense t3 = getExpense(300, OtherExpensesType.CAR_RENTAL);
 
-        report.printReport(List.of(t, tOver, t2, t2Over, t3));
+        Expense t4 = getExpense(50, MealType.LUNCH);
+        Expense t4Over = getExpense(2001, MealType.LUNCH);
+
+        report.printReport(List.of(t, tOver, t2, t2Over, t3, t4, t4Over));
 
         // Assert
         Approvals.verify(result);
