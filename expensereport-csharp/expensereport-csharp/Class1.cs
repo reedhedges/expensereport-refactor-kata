@@ -4,21 +4,13 @@ using System.Text;
 
 namespace expensereport_csharp
 {
-    public enum ExpenseType
-    {
-        DINNER, BREAKFAST, CAR_RENTAL
-    }
-
-
     public abstract class Expense
     {
-        protected Expense(ExpenseType type, int amount)
+        protected Expense( int amount)
         {
-            this.type = type;
             this.amount = amount;
         }
 
-        public ExpenseType type;
         public int amount;
 
         public abstract string getExpenseName();
@@ -27,12 +19,16 @@ namespace expensereport_csharp
             return amount;
         }
 
-        public abstract boolean isOverexpensed();
+        public virtual bool isOverexpensed()
+        {
+            return false;
+        }
+
     }
 
     public class DinnerExpense : Expense
     {
-        public DinnerExpense(int amount) : base (ExpenseType.DINNER, amount)
+        public DinnerExpense(int amount) : base (amount)
         {
 
         }
@@ -41,16 +37,13 @@ namespace expensereport_csharp
             return "Dinner";
         }
 
-        public override boolean isOverexpensed(){
-            // TODO
-            return false;
-        }
+        public override bool isOverexpensed() => this.amount > 5000;
 
     }
 
     public class BreakfastExpense : Expense
     {
-        public BreakfastExpense(int amount) : base(ExpenseType.BREAKFAST, amount)
+        public BreakfastExpense(int amount) : base(amount)
         {
         }
 
@@ -58,15 +51,12 @@ namespace expensereport_csharp
             return "Breakfast";
         }
 
-        public override boolean isOverexpensed(){
-            // TODO
-            return false;
-        }
+        public override bool isOverexpensed() => this.amount > 1000;
     }
 
     public class CarRentalExpense : Expense
     {
-        public CarRentalExpense(int amount) : base(ExpenseType.CAR_RENTAL, amount)
+        public CarRentalExpense(int amount) : base(amount)
         {
         }
 
@@ -76,11 +66,6 @@ namespace expensereport_csharp
 
         public override int getMealExpense() {
             return 0;
-        }
-
-        public override boolean isOverexpensed(){
-            // TODO
-            return false;
         }
     }
 
@@ -97,13 +82,9 @@ namespace expensereport_csharp
             {
                 mealExpenses += expense.getMealExpense();
 
-                String mealOverExpensesMarker =
-                    expense.type == ExpenseType.DINNER && expense.amount > 5000 ||
-                    expense.type == ExpenseType.BREAKFAST && expense.amount > 1000
-                        ? "X"
-                        : " ";
+                String mealOverExpensesMarker = expense.isOverexpensed() ? "X" : " ";
 
-                WriteOutput(expense.getExpenseName() + "\t" + expense.amount + "\t" + mealOverExpensesMarker);
+                WriteOutput($"{expense.getExpenseName()}\t{ expense.amount }\t{ mealOverExpensesMarker}");
 
                 total += expense.amount;
             }
