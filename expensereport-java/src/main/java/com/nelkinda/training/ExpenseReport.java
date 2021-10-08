@@ -6,6 +6,7 @@ import java.util.List;
 interface ExpenseType {
 
     String getDescription();
+    String getMealOverExpensesMarker(int amount);
 }
 
 enum MealType implements ExpenseType {
@@ -13,8 +14,8 @@ enum MealType implements ExpenseType {
     BREAKFAST("Breakfast", 1000),
     LUNCH("Lunch", 2000);
 
-    private String description;
-    private int maxAmount;
+    private final String description;
+    private final int maxAmount;
 
     MealType(String description, int maxAmount) {
         this.description = description;
@@ -26,6 +27,11 @@ enum MealType implements ExpenseType {
         return description;
     }
 
+    @Override
+    public String getMealOverExpensesMarker(int amount) {
+        return amount > getMaxAmount() ? "X" : " ";
+    }
+
     public int getMaxAmount() {
         return maxAmount;
     }
@@ -34,7 +40,7 @@ enum MealType implements ExpenseType {
 enum OtherExpensesType implements ExpenseType {
     CAR_RENTAL("Car Rental");
 
-    private String description;
+    private final String description;
 
     OtherExpensesType(String description) {
         this.description = description;
@@ -44,17 +50,23 @@ enum OtherExpensesType implements ExpenseType {
     public String getDescription() {
         return description;
     }
+
+    @Override
+    public String getMealOverExpensesMarker(int maxAmount) {
+        return " ";
+    }
+
 }
 class Expense {
     ExpenseType type;
     int amount;
 
-    public String getMealOverExpensesMarker(){
-        return (type instanceof MealType && amount > ((MealType)type).getMaxAmount() ) ? "X":" ";
+    public boolean isMealType() {
+        return type instanceof MealType;
     }
 
     public String toString() {
-        return type.getDescription() + "\t" + amount + "\t" + getMealOverExpensesMarker();
+        return type.getDescription() + "\t" + amount + "\t" + type.getMealOverExpensesMarker(amount);
     }
 }
 
@@ -66,7 +78,7 @@ public class ExpenseReport {
         System.out.println("Expenses " + currentDate());
 
         for (Expense expense : expenses) {
-            if (expense.type instanceof MealType) {
+            if (expense.isMealType()) {
                 mealExpenses += expense.amount;
             }
             System.out.println(expense);
