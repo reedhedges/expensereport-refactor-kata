@@ -26,6 +26,11 @@ class Expense {
     String getExpenseName() {
         return type.getExpenseName();
     }
+
+    boolean isMealOverExpenses() {
+        return type == ExpenseType.DINNER && amount > 5000
+                || type == ExpenseType.BREAKFAST && amount > 1000;
+    }
 }
 
 public class ExpenseReport {
@@ -44,8 +49,7 @@ public class ExpenseReport {
                 mealExpenses += expense.amount;
             }
 
-            String mealOverExpensesMarker = expense.type == ExpenseType.DINNER && expense.amount > 5000
-                    || expense.type == ExpenseType.BREAKFAST && expense.amount > 1000 ? "X" : " ";
+            String mealOverExpensesMarker = expense.isMealOverExpenses() ? "X" : " ";
 
             System.out.println(expense.getExpenseName() + "\t" + expense.amount + "\t" + mealOverExpensesMarker);
 
