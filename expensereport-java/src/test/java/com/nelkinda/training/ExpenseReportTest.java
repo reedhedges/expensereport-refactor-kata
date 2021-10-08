@@ -36,6 +36,13 @@ public class ExpenseReportTest {
     }
 
     @Test
+    public void printLunch() {
+        expenseReport.printReport(Collections.singletonList(createExpense(ExpenseType.LUNCH, 1000)), new Date(0));
+
+        Approvals.verify(outputStream.toString());
+    }
+
+    @Test
     public void printCarRental() {
         expenseReport.printReport(Collections.singletonList(createExpense(ExpenseType.CAR_RENTAL, 10)), new Date(0));
 

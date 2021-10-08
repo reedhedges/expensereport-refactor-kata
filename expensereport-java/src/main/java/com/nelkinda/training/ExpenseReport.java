@@ -4,9 +4,12 @@ import java.util.Date;
 import java.util.List;
 
 enum ExpenseType {
-    DINNER("Dinner", 5000, true),
     BREAKFAST("Breakfast", 1000, true),
-    CAR_RENTAL("Car Rental", Integer.MAX_VALUE, false);
+    LUNCH("Lunch", 2000, true),
+    DINNER("Dinner", 5000, true),
+    CAR_RENTAL("Car Rental", Integer.MAX_VALUE, false)
+
+    ;
 
     private final String expenseName;
     private final int amountLimit;
