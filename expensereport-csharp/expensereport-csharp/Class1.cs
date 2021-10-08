@@ -20,6 +20,12 @@ namespace expensereport_csharp
 
         public ExpenseType type;
         public int amount;
+
+        public abstract string getExpenseName();
+
+        public virtual int getMealExpense() {
+            return amount;
+        }
     }
 
     public class DinnerExpense : Expense
@@ -29,6 +35,10 @@ namespace expensereport_csharp
 
         }
 
+        public override string getExpenseName() {
+            return "Dinner";
+        }
+
     }
 
     public class BreakfastExpense : Expense
@@ -36,12 +46,24 @@ namespace expensereport_csharp
         public BreakfastExpense(int amount) : base(ExpenseType.BREAKFAST, amount)
         {
         }
+
+        public override string getExpenseName() {
+            return "Breakfast";
+        }
     }
 
     public class CarRentalExpense : Expense
     {
         public CarRentalExpense(int amount) : base(ExpenseType.CAR_RENTAL, amount)
         {
+        }
+
+        public override string getExpenseName() {
+            return "Car Rental";
+        }
+
+        public override int getMealExpense() {
+            return 0;
         }
     }
 
@@ -56,24 +78,7 @@ namespace expensereport_csharp
 
             foreach (Expense expense in expenses)
             {
-                if (expense.type == ExpenseType.DINNER || expense.type == ExpenseType.BREAKFAST)
-                {
-                    mealExpenses += expense.amount;
-                }
-
-                String expenseName = "";
-                switch (expense.type)
-                {
-                    case ExpenseType.DINNER:
-                        expenseName = "Dinner";
-                        break;
-                    case ExpenseType.BREAKFAST:
-                        expenseName = "Breakfast";
-                        break;
-                    case ExpenseType.CAR_RENTAL:
-                        expenseName = "Car Rental";
-                        break;
-                }
+                mealExpenses += expense.getMealExpense();
 
                 String mealOverExpensesMarker =
                     expense.type == ExpenseType.DINNER && expense.amount > 5000 ||
@@ -81,7 +86,7 @@ namespace expensereport_csharp
                         ? "X"
                         : " ";
 
-                WriteOutput(expenseName + "\t" + expense.amount + "\t" + mealOverExpensesMarker);
+                WriteOutput(expense.getExpenseName() + "\t" + expense.amount + "\t" + mealOverExpensesMarker);
 
                 total += expense.amount;
             }
