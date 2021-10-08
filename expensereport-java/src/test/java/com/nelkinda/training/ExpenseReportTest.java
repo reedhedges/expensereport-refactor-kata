@@ -5,6 +5,7 @@ import org.approvaltests.Approvals;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 
@@ -51,6 +52,26 @@ public class ExpenseReportTest {
     @Test
     public void printBreakfastOverExpense() {
         expenseReport.printReport(Collections.singletonList(createExpense(ExpenseType.BREAKFAST, 2000)), new Date(0));
+
+        Approvals.verify(outputStream.toString());
+    }
+
+    @Test
+    public void printDinnerAndBreakfast() {
+        expenseReport.printReport(Arrays.asList(createExpense(ExpenseType.DINNER, 5100),
+                createExpense(ExpenseType.BREAKFAST, 20)),
+                new Date(0));
+
+        Approvals.verify(outputStream.toString());
+    }
+
+    @Test
+    public void printDinnerAndBreakfastAndCarRental() {
+        expenseReport.printReport(Arrays.asList(createExpense(ExpenseType.DINNER, 5100),
+                createExpense(ExpenseType.BREAKFAST, 20),
+                createExpense(ExpenseType.DINNER, 50),
+                createExpense(ExpenseType.CAR_RENTAL, 33234))
+                , new Date(0));
 
         Approvals.verify(outputStream.toString());
     }

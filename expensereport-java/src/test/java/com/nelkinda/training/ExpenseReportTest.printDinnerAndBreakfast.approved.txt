@@ -1,0 +1,5 @@
+Expenses Thu Jan 01 01:00:00 CET 1970
+Dinner	5100	X
+Breakfast	20	 
+Meal expenses: 5120
+Total expenses: 5120

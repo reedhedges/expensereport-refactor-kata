@@ -1,0 +1,7 @@
+Expenses Thu Jan 01 01:00:00 CET 1970
+Dinner	5100	X
+Breakfast	20	 
+Dinner	50	 
+Car Rental	33234	 
+Meal expenses: 5170
+Total expenses: 38404
