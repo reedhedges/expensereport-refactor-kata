@@ -67,41 +67,17 @@ class Expense {
 }
 
 public class ExpenseReport {
+
     public void printReport(List<Expense> expenses) {
         printReport(expenses, new Date());
     }
 
-    public void printReport(List<Expense> expenses, Date date) {
+    public void printReport(List<Expense> expenseList, Date date) {
+        final Expenses expenses = new Expenses(expenseList);
         System.out.println("Expenses " + date);
-        printExpenseInformation(expenses);
-        System.out.println("Meal expenses: " + calculateMealExpenses(expenses));
-        System.out.println("Total expenses: " + calculateTotal(expenses));
-    }
-
-    private void printExpenseInformation(List<Expense> expenses) {
-        for (Expense expense : expenses) {
-            System.out.println(expense.toString());
-        }
-    }
-
-    private int calculateMealExpenses(List<Expense> expenses) {
-        int mealExpenses = 0;
-        for (Expense expense : expenses) {
-            int mealExpenses1 = mealExpenses;
-            if (expense.isMeal()) {
-                mealExpenses1 += expense.getAmount();
-            }
-            mealExpenses = mealExpenses1;
-        }
-        return mealExpenses;
-    }
-
-    private int calculateTotal(List<Expense> expenses) {
-        int total = 0;
-        for (Expense expense : expenses) {
-            total += expense.getAmount();
-        }
-        return total;
+        expenses.printExpenseInformation();
+        System.out.println("Meal expenses: " + expenses.calculateMealExpenses());
+        System.out.println("Total expenses: " + expenses.calculateTotal());
     }
 
 }
