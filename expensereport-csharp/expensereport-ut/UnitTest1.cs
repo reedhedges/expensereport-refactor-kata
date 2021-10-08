@@ -19,6 +19,14 @@ namespace Tests
         protected override string GetCurrentDate() => "01.01.0001 00:00:00";
     }
 
+    class BaseExpenseTest : Expense
+    {
+        public BaseExpenseTest(int amount, string name) : base(amount, name)
+        {
+
+        }
+    }
+
     [UseReporter(typeof(DiffReporter))]
 
     public class Tests
@@ -117,6 +125,34 @@ namespace Tests
                 });
 
             Approvals.Verify(report.Output.ToString());
+        }
+
+        [Test]
+        public void Expense_NegativeAmount_Throws()
+        {
+
+            Assert.Throws<ArgumentOutOfRangeException>(() => new BaseExpenseTest (-1, "base"));
+        }
+
+        [Test]
+        public void Expense_NameNull_Throws()
+        {
+
+            Assert.Throws<ArgumentNullException>(() => new BaseExpenseTest (0, null));
+        }
+
+        [Test]
+        public void Expense_NameEmpty_Throws()
+        {
+
+            Assert.Throws<ArgumentNullException>(() => new BaseExpenseTest (0, ""));
+        }
+
+        [Test]
+        public void Expense_NameWhiteSpace_Throws()
+        {
+
+            Assert.Throws<ArgumentNullException>(() => new BaseExpenseTest (0, "  "));
         }
     }
 }

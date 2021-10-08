@@ -11,7 +11,7 @@ namespace expensereport_csharp
             if (amount < 0) throw new ArgumentOutOfRangeException(nameof(amount));
 
             this.amount = amount;
-            this.name = name ?? throw new ArgumentNullException(nameof(name));
+            this.name = String.IsNullOrWhiteSpace(name) ? throw new ArgumentNullException(nameof(name)) : name;
             this.expenseLimit = expenseLimit;
         }
 
