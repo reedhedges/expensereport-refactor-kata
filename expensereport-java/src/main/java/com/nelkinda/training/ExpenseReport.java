@@ -4,14 +4,20 @@ import java.util.Date;
 import java.util.List;
 
 enum ExpenseType {
-    DINNER("Dinner"),
-    BREAKFAST("Breakfast"),
-    CAR_RENTAL("Car Rental");
+    DINNER("Dinner", 5000),
+    BREAKFAST("Breakfast", 1000),
+    CAR_RENTAL("Car Rental", Integer.MAX_VALUE);
 
     private final String expenseName;
+    private final int maxAmount;
 
-    ExpenseType(String expenseName) {
+    ExpenseType(String expenseName, int maxAmount) {
         this.expenseName = expenseName;
+        this.maxAmount = maxAmount;
+    }
+
+    public int getMaxAmount() {
+        return maxAmount;
     }
 
     public String getExpenseName() {
@@ -27,8 +33,8 @@ class Expense {
         return type.getExpenseName();
     }
 
-    boolean isMealOverExpenses() {
-        return type == ExpenseType.DINNER && amount > 5000
+    boolean isOverLimit() {
+        return type == ExpenseType.DINNER && amount > ExpenseType.DINNER.getMaxAmount()
                 || type == ExpenseType.BREAKFAST && amount > 1000;
     }
 }
@@ -50,7 +56,7 @@ public class ExpenseReport {
                 mealExpenses += expense.amount;
             }
 
-            String mealOverExpensesMarker = expense.isMealOverExpenses() ? "X" : " ";
+            String mealOverExpensesMarker = expense.isOverLimit() ? "X" : " ";
 
             System.out.println(expense.getExpenseName() + "\t" + expense.amount + "\t" + mealOverExpensesMarker);
 
