@@ -4,16 +4,18 @@ import java.util.Date;
 import java.util.List;
 
 enum ExpenseType {
-    DINNER("Dinner", 5000),
-    BREAKFAST("Breakfast", 1000),
-    CAR_RENTAL("Car Rental", Integer.MAX_VALUE);
+    DINNER("Dinner", 5000, true),
+    BREAKFAST("Breakfast", 1000, true),
+    CAR_RENTAL("Car Rental", Integer.MAX_VALUE, false);
 
     private final String expenseName;
     private final int amountLimit;
+    private final boolean isMeal;
 
-    ExpenseType(String expenseName, int amountLimit) {
+    ExpenseType(String expenseName, int amountLimit, boolean isMeal) {
         this.expenseName = expenseName;
         this.amountLimit = amountLimit;
+        this.isMeal = isMeal;
     }
 
     public int getAmountLimit() {
@@ -22,6 +24,10 @@ enum ExpenseType {
 
     public String getExpenseName() {
         return expenseName;
+    }
+
+    public boolean isMeal() {
+        return isMeal;
     }
 }
 
@@ -35,6 +41,14 @@ class Expense {
 
     boolean isOverLimit() {
         return amount > type.getAmountLimit();
+    }
+
+    boolean isMeal() {
+        return type.isMeal();
+    }
+
+    int getAmount() {
+        return amount;
     }
 }
 
@@ -50,15 +64,15 @@ public class ExpenseReport {
         System.out.println("Expenses " + date);
 
         for (Expense expense : expenses) {
-            if (expense.type == ExpenseType.DINNER || expense.type == ExpenseType.BREAKFAST) {
-                mealExpenses += expense.amount;
+            if (expense.isMeal()) {
+                mealExpenses += expense.getAmount();
             }
 
             String mealOverExpensesMarker = expense.isOverLimit() ? "X" : " ";
 
-            System.out.println(expense.getExpenseName() + "\t" + expense.amount + "\t" + mealOverExpensesMarker);
+            System.out.println(expense.getExpenseName() + "\t" + expense.getAmount() + "\t" + mealOverExpensesMarker);
 
-            total += expense.amount;
+            total += expense.getAmount();
         }
 
         System.out.println("Meal expenses: " + mealExpenses);
