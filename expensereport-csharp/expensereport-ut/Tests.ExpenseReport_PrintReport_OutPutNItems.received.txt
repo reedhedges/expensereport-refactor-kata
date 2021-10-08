@@ -1,6 +1,0 @@
-﻿Expenses 10/8/2021 11:35:46 AM
-Breakfast	1	 
-Car Rental	1	 
-Dinner	1	 
-2
-Total expenses: 3

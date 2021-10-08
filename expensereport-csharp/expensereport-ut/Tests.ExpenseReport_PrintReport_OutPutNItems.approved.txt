@@ -1,4 +1,4 @@
-﻿Expenses 10/8/2021 11:34:53 AM
+﻿Expenses 1/1/0001 12:00:00 AM
 Breakfast	1	 
 Car Rental	1	 
 Dinner	1	 

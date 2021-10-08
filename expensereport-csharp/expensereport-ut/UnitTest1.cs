@@ -2,6 +2,7 @@ using ApprovalTests;
 using ApprovalTests.Reporters;
 using expensereport_csharp;
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -14,6 +15,8 @@ namespace Tests
 
         protected override void WriteOutput(string message) =>
             Output.AppendLine(message);
+
+        protected override DateTime GetCurrentDate() => DateTime.MinValue;
     }
 
     [UseReporter(typeof(DiffReporter))]
