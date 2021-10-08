@@ -34,8 +34,7 @@ class Expense {
     }
 
     boolean isOverLimit() {
-        return type == ExpenseType.DINNER && amount > ExpenseType.DINNER.getMaxAmount()
-                || type == ExpenseType.BREAKFAST && amount > 1000;
+        return amount > type.getMaxAmount();
     }
 }
 
