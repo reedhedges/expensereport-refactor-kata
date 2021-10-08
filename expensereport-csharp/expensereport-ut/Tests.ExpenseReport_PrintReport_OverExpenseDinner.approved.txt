@@ -1,4 +1,4 @@
 ﻿Expenses 01.01.0001 00:00:00
 Dinner	5001	X
-5001
+Meal expenses:5001
 Total expenses: 5001

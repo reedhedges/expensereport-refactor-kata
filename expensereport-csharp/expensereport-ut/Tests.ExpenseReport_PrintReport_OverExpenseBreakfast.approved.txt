@@ -1,4 +1,4 @@
 ﻿Expenses 01.01.0001 00:00:00
 Breakfast	1001	X
-1001
+Meal expenses:1001
 Total expenses: 1001

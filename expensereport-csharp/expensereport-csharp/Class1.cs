@@ -102,8 +102,8 @@ namespace expensereport_csharp
                 total += expense.amount;
             }
 
-            WriteOutput(mealExpenses.ToString());
-            WriteOutput("Total expenses: " + total);
+            WriteOutput($"Meal expenses:{mealExpenses}");
+            WriteOutput($"Total expenses: {total}");
         }
 
         protected virtual void WriteOutput(string message) => Console.WriteLine(message);

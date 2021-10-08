@@ -1,3 +1,3 @@
 ﻿Expenses 01.01.0001 00:00:00
-0
+Meal expenses:0
 Total expenses: 0
