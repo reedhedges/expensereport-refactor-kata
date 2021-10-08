@@ -15,7 +15,7 @@ class Expense {
 public class ExpenseReport {
     public void printReport(List<Expense> expenses) {
         int total = 0;
-        int mealExpenses = 0;
+        int mealExpenses =  0;
 
         System.out.println("Expenses " + new Date());
 
