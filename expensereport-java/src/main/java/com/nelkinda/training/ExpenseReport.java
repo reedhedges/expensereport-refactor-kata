@@ -55,6 +55,15 @@ class Expense {
     int getAmount() {
         return amount;
     }
+
+    String getExceedingLimitMark() {
+        return isOverLimit() ? "X" : " ";
+    }
+
+    @Override
+    public String toString() {
+        return getExpenseName() + "\t" + getAmount() + "\t" + getExceedingLimitMark();
+    }
 }
 
 public class ExpenseReport {
@@ -63,17 +72,16 @@ public class ExpenseReport {
     }
 
     public void printReport(List<Expense> expenses, Date date) {
-
-
         System.out.println("Expenses " + date);
-
-        for (Expense expense : expenses) {
-            String mealOverExpensesMarker = expense.isOverLimit() ? "X" : " ";
-            System.out.println(expense.getExpenseName() + "\t" + expense.getAmount() + "\t" + mealOverExpensesMarker);
-        }
-
+        printExpenseInformation(expenses);
         System.out.println("Meal expenses: " + calculateMealExpenses(expenses));
         System.out.println("Total expenses: " + calculateTotal(expenses));
+    }
+
+    private void printExpenseInformation(List<Expense> expenses) {
+        for (Expense expense : expenses) {
+            System.out.println(expense.toString());
+        }
     }
 
     private int calculateMealExpenses(List<Expense> expenses) {
