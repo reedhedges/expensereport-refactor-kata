@@ -1,0 +1,4 @@
+Expenses Thu Jan 01 01:00:00 CET 1970
+Dinner	10	 
+Meal expenses: 10
+Total expenses: 10
