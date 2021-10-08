@@ -64,17 +64,16 @@ namespace expensereport_csharp
             int total = 0;
             int mealExpenses = 0;
 
-            WriteOutput("Expenses " + GetCurrentDate());
+            WriteOutput($"Expenses {GetCurrentDate()}");
 
             foreach (Expense expense in expenses)
             {
-                mealExpenses += expense.getMealExpense();
+                var mealOverExpensesMarker = expense.isOverexpensed() ? "X" : " ";
 
-                String mealOverExpensesMarker = expense.isOverexpensed() ? "X" : " ";
+                mealExpenses += expense.getMealExpense();
+                total += expense.amount;
 
                 WriteOutput($"{expense.getExpenseName()}\t{ expense.amount }\t{ mealOverExpensesMarker}");
-
-                total += expense.amount;
             }
 
             WriteOutput($"Meal expenses:{mealExpenses}");
