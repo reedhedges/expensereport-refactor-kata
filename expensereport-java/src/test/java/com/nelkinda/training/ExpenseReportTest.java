@@ -41,6 +41,20 @@ public class ExpenseReportTest {
         Approvals.verify(outputStream.toString());
     }
 
+    @Test
+    public void printDinnerOverExpense() {
+        expenseReport.printReport(Collections.singletonList(createExpense(ExpenseType.DINNER, 5100)), new Date(0));
+
+        Approvals.verify(outputStream.toString());
+    }
+
+    @Test
+    public void printBreakfastOverExpense() {
+        expenseReport.printReport(Collections.singletonList(createExpense(ExpenseType.BREAKFAST, 2000)), new Date(0));
+
+        Approvals.verify(outputStream.toString());
+    }
+
     private Expense createExpense(ExpenseType expenseType, int amount) {
         Expense expense = new Expense();
         expense.type = expenseType;
