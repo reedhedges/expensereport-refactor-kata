@@ -52,6 +52,10 @@ class Expense {
     public String getMealOverExpensesMarker(){
         return (type instanceof MealType && amount > ((MealType)type).getMaxAmount() ) ? "X":" ";
     }
+
+    public String toString() {
+        return type.getDescription() + "\t" + amount + "\t" + getMealOverExpensesMarker();
+    }
 }
 
 public class ExpenseReport {
@@ -65,7 +69,7 @@ public class ExpenseReport {
             if (expense.type instanceof MealType) {
                 mealExpenses += expense.amount;
             }
-            System.out.println(expense.type.getDescription() + "\t" + expense.amount + "\t" + expense.getMealOverExpensesMarker());
+            System.out.println(expense);
 
             total += expense.amount;
         }
