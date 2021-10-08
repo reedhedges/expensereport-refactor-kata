@@ -6,8 +6,10 @@ import java.util.List;
 interface ExpenseType {
 
     String getDescription();
+
     String getMealOverExpensesMarker(int amount);
-    default boolean isMealType(){
+
+    default boolean isMealType() {
         return false;
     }
 }
@@ -65,6 +67,7 @@ enum OtherExpensesType implements ExpenseType {
     }
 
 }
+
 class Expense {
     ExpenseType type;
     int amount;

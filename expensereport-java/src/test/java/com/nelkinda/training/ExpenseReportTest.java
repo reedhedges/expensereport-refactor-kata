@@ -16,8 +16,8 @@ class ExpenseReportTest {
     private ExpenseReport report;
 
     @BeforeEach
-    void setup(){
-         result = au.writeSystemOutToStringBuffer();
+    void setup() {
+        result = au.writeSystemOutToStringBuffer();
         report = new ExpenseReport() {
             @Override
             protected Date currentDate() {
