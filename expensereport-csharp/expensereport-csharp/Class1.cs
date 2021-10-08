@@ -26,6 +26,8 @@ namespace expensereport_csharp
         public virtual int getMealExpense() {
             return amount;
         }
+
+        public abstract boolean isOverexpensed();
     }
 
     public class DinnerExpense : Expense
@@ -39,6 +41,11 @@ namespace expensereport_csharp
             return "Dinner";
         }
 
+        public override boolean isOverexpensed(){
+            // TODO
+            return false;
+        }
+
     }
 
     public class BreakfastExpense : Expense
@@ -49,6 +56,11 @@ namespace expensereport_csharp
 
         public override string getExpenseName() {
             return "Breakfast";
+        }
+
+        public override boolean isOverexpensed(){
+            // TODO
+            return false;
         }
     }
 
@@ -64,6 +76,11 @@ namespace expensereport_csharp
 
         public override int getMealExpense() {
             return 0;
+        }
+
+        public override boolean isOverexpensed(){
+            // TODO
+            return false;
         }
     }
 
