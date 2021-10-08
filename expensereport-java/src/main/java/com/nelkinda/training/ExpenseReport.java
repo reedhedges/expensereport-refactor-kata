@@ -32,8 +32,13 @@ enum ExpenseType {
 }
 
 class Expense {
-    ExpenseType type;
-    int amount;
+    private final ExpenseType type;
+    private final int amount;
+
+    public Expense(ExpenseType type, int amount) {
+        this.type = type;
+        this.amount = amount;
+    }
 
     String getExpenseName() {
         return type.getExpenseName();
@@ -64,9 +69,7 @@ public class ExpenseReport {
         System.out.println("Expenses " + date);
 
         for (Expense expense : expenses) {
-            if (expense.isMeal()) {
-                mealExpenses += expense.getAmount();
-            }
+            mealExpenses = calculateMealExpenses(mealExpenses, expense);
 
             String mealOverExpensesMarker = expense.isOverLimit() ? "X" : " ";
 
@@ -77,6 +80,13 @@ public class ExpenseReport {
 
         System.out.println("Meal expenses: " + mealExpenses);
         System.out.println("Total expenses: " + total);
+    }
+
+    private int calculateMealExpenses(int mealExpenses, Expense expense) {
+        if (expense.isMeal()) {
+            mealExpenses += expense.getAmount();
+        }
+        return mealExpenses;
     }
 
 }

@@ -77,9 +77,7 @@ public class ExpenseReportTest {
     }
 
     private Expense createExpense(ExpenseType expenseType, int amount) {
-        Expense expense = new Expense();
-        expense.type = expenseType;
-        expense.amount = amount;
+        Expense expense = new Expense(expenseType, amount);
         return expense;
     }
 
