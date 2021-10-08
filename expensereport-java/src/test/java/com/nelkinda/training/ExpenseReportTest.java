@@ -45,13 +45,13 @@ class ExpenseReportTest {
         };
 
         // Act
-        Expense t = getExpense(100, ExpenseType.DINNER);
-        Expense tOver = getExpense(5001, ExpenseType.DINNER);
+        Expense t = getExpense(100, MealType.DINNER);
+        Expense tOver = getExpense(5001, MealType.DINNER);
 
-        Expense t2 = getExpense(200, ExpenseType.BREAKFAST);
-        Expense t2Over = getExpense(1001, ExpenseType.BREAKFAST);
+        Expense t2 = getExpense(200, MealType.BREAKFAST);
+        Expense t2Over = getExpense(1001, MealType.BREAKFAST);
 
-        Expense t3 = getExpense(300, ExpenseType.CAR_RENTAL);
+        Expense t3 = getExpense(300, OtherExpensesType.CAR_RENTAL);
 
         report.printReport(List.of(t, tOver, t2, t2Over, t3));
 

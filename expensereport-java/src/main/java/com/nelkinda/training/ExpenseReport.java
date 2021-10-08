@@ -20,7 +20,7 @@ enum MealType implements ExpenseType {
 
     @Override
     public String getDescription() {
-        return null;
+        return description;
     }
 }
 
@@ -35,7 +35,7 @@ enum OtherExpensesType implements ExpenseType {
 
     @Override
     public String getDescription() {
-        return null;
+        return description;
     }
 }
 class Expense {
@@ -68,8 +68,8 @@ public class ExpenseReport {
     }
 
     private String getMealOverExpensesMarker(Expense expense) {
-        return expense.type == ExpenseType.DINNER && expense.amount > 5000 ||
-               expense.type == ExpenseType.BREAKFAST && expense.amount > 1000
+        return expense.type == MealType.DINNER && expense.amount > 5000 ||
+               expense.type == MealType.BREAKFAST && expense.amount > 1000
                 ? "X" : " ";
     }
 
