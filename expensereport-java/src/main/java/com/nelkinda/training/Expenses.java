@@ -16,22 +16,15 @@ public class Expenses {
     }
 
     int calculateMealExpenses() {
-        int mealExpenses = 0;
-        for (Expense expense : this.expenses) {
-            int mealExpenses1 = mealExpenses;
-            if (expense.isMeal()) {
-                mealExpenses1 += expense.getAmount();
-            }
-            mealExpenses = mealExpenses1;
-        }
-        return mealExpenses;
+        return this.expenses.stream()
+                .filter(expense -> expense.isMeal())
+                .mapToInt(expense -> expense.getAmount())
+                .sum();
     }
 
     int calculateTotal() {
-        int total = 0;
-        for (Expense expense : this.expenses) {
-            total += expense.getAmount();
-        }
-        return total;
+        return this.expenses.stream()
+                .mapToInt(Expense::getAmount)
+                .sum();
     }
 }
