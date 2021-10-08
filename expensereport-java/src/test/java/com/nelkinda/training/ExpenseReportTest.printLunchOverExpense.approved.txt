@@ -1,0 +1,4 @@
+Expenses Thu Jan 01 01:00:00 CET 1970
+Lunch	4000	X
+Meal expenses: 4000
+Total expenses: 4000

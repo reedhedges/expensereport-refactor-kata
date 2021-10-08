@@ -64,6 +64,13 @@ public class ExpenseReportTest {
     }
 
     @Test
+    public void printLunchOverExpense() {
+        expenseReport.printReport(Collections.singletonList(createExpense(ExpenseType.LUNCH, 4000)), new Date(0));
+
+        Approvals.verify(outputStream.toString());
+    }
+
+    @Test
     public void printDinnerAndBreakfast() {
         expenseReport.printReport(Arrays.asList(createExpense(ExpenseType.DINNER, 5100),
                 createExpense(ExpenseType.BREAKFAST, 20)),
@@ -71,6 +78,8 @@ public class ExpenseReportTest {
 
         Approvals.verify(outputStream.toString());
     }
+
+
 
     @Test
     public void printDinnerAndBreakfastAndCarRental() {
