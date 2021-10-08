@@ -5,7 +5,6 @@ import org.approvaltests.Approvals;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
