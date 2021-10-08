@@ -17,14 +17,12 @@ namespace expensereport_csharp
 
     public class ExpenseReport
     {
-        public StringBuilder OutPut { get; } = new StringBuilder();
-
         public void PrintReport(List<Expense> expenses)
         {
             int total = 0;
             int mealExpenses = 0;
 
-            Console.WriteLine("Expenses " + DateTime.Now);
+            WriteOutput("Expenses " + DateTime.Now);
 
             foreach (Expense expense in expenses)
             {
@@ -53,14 +51,15 @@ namespace expensereport_csharp
                         ? "X"
                         : " ";
 
-                Console.WriteLine(expenseName + "\t" + expense.amount + "\t" + mealOverExpensesMarker);
+                WriteOutput(expenseName + "\t" + expense.amount + "\t" + mealOverExpensesMarker);
 
                 total += expense.amount;
             }
 
-            Console.WriteLine("Meal expenses: " + mealExpenses);
-            Console.WriteLine("Total expenses: " + total);
+            WriteOutput(mealExpenses.ToString());
+            WriteOutput("Total expenses: " + total);
         }
 
+        protected virtual void WriteOutput(string message) => Console.WriteLine(message);
     }
 }

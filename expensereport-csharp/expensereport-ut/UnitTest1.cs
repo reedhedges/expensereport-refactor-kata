@@ -1,9 +1,23 @@
+using ApprovalTests;
+using ApprovalTests.Reporters;
 using expensereport_csharp;
 using NUnit.Framework;
 using System.Collections.Generic;
+using System.Text;
 
 namespace Tests
 {
+
+    class ExpenseReportFake : ExpenseReport
+    {
+        public StringBuilder Output { get; } = new StringBuilder();
+
+        protected override void WriteOutput(string message) =>
+            Output.AppendLine(message);
+    }
+
+    [UseReporter(typeof(DiffReporter))]
+
     public class Tests
     {
         [SetUp]
@@ -14,7 +28,7 @@ namespace Tests
         [Test]
         public void ExpenseReport_PrintReport_OutPutNItems()
         {
-            var report = new ExpenseReport();
+            var report = new ExpenseReportFake();
 
             report.PrintReport(new List<Expense>()
                 {
@@ -23,8 +37,7 @@ namespace Tests
                     new Expense { amount = 1, type = ExpenseType.DINNER }
                 });
 
-            
-            Assert.Pass();
+            Approvals.Verify(report.Output.ToString());
         }
     }
 }
