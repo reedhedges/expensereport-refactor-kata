@@ -22,15 +22,30 @@ public class ExpenseReportTest {
 
     @Test
     public void printDinner() {
-        expenseReport.printReport(Collections.singletonList(createDinnerExpense()), new Date(0));
+        expenseReport.printReport(Collections.singletonList(createExpense(ExpenseType.DINNER, 10)), new Date(0));
 
         Approvals.verify(outputStream.toString());
     }
 
-    private Expense createDinnerExpense() {
+    @Test
+    public void printBreakfast() {
+        expenseReport.printReport(Collections.singletonList(createExpense(ExpenseType.BREAKFAST, 10)), new Date(0));
+
+        Approvals.verify(outputStream.toString());
+    }
+
+    @Test
+    public void printCarRental() {
+        expenseReport.printReport(Collections.singletonList(createExpense(ExpenseType.CAR_RENTAL, 10)), new Date(0));
+
+        Approvals.verify(outputStream.toString());
+    }
+
+    private Expense createExpense(ExpenseType expenseType, int amount) {
         Expense expense = new Expense();
-        expense.type = ExpenseType.DINNER;
-        expense.amount = 10;
+        expense.type = expenseType;
+        expense.amount = amount;
         return expense;
     }
+
 }
