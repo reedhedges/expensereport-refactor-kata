@@ -1,6 +1,8 @@
 Expenses Thu Jan 01 01:00:00 CET 1970
 Dinner	100	 
+Dinner	5001	X
 Breakfast	200	 
+Breakfast	1001	X
 Car Rental	300	 
-Meal expenses: 300
-Total expenses: 600
+Meal expenses: 6302
+Total expenses: 6602
