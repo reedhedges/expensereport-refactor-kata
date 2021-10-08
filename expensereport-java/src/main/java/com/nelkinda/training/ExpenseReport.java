@@ -48,12 +48,8 @@ class Expense {
     ExpenseType type;
     int amount;
 
-    public boolean isOverMaxAmmount(){
-        if(type instanceof MealType){
-            MealType mealType = (MealType) type;
-            return amount > mealType.getMaxAmmount();
-        }
-        return false;
+    public String getMealOverExpensesMarker(){
+        return (type instanceof MealType && amount > ((MealType)type).getMaxAmmount() ) ? "X":" ";
     }
 }
 
@@ -68,10 +64,7 @@ public class ExpenseReport {
             if (expense.type instanceof MealType) {
                 mealExpenses += expense.amount;
             }
-
-            String mealOverExpensesMarker = getMealOverExpensesMarker(expense);
-
-            System.out.println(expense.type.getDescription() + "\t" + expense.amount + "\t" + mealOverExpensesMarker);
+            System.out.println(expense.type.getDescription() + "\t" + expense.amount + "\t" + expense.getMealOverExpensesMarker());
 
             total += expense.amount;
         }
@@ -79,10 +72,6 @@ public class ExpenseReport {
         System.out.println("Meal expenses: " + mealExpenses);
         System.out.println("Total expenses: " + total);
 
-    }
-
-    private String getMealOverExpensesMarker(Expense expense) {
-        return expense.isOverMaxAmmount() ? "X" : " ";
     }
 
     protected Date currentDate() {
