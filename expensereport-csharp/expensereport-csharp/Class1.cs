@@ -6,18 +6,20 @@ namespace expensereport_csharp
 {
     public abstract class Expense
     {
-        protected Expense(int amount, int expenseLimit = -1)
+        protected Expense(int amount, string name, int expenseLimit = -1)
         {
             if (amount < 0) throw new ArgumentOutOfRangeException(nameof(amount));
 
             this.amount = amount;
+            this.name = name ?? throw new ArgumentNullException(nameof(name));
             this.expenseLimit = expenseLimit;
         }
 
         public int amount;
         private readonly int expenseLimit;
+        private readonly string name;
 
-        public abstract string getExpenseName();
+        public string getExpenseName() => this.name;
 
         public virtual int getMealExpense() => amount;
 
@@ -26,39 +28,31 @@ namespace expensereport_csharp
 
     public class DinnerExpense : Expense
     {
-        public DinnerExpense(int amount) : base(amount, 5000)
+        public DinnerExpense(int amount) : base(amount, "Dinner", 5000)
         {
 
         }
-
-        public override string getExpenseName() => "Dinner";
     }
 
     public class BreakfastExpense : Expense
     {
-        public BreakfastExpense(int amount) : base(amount, 1000)
+        public BreakfastExpense(int amount) : base(amount,"Breakfast", 1000)
         {
         }
-
-        public override string getExpenseName() => "Breakfast";
     }
 
     public class LunchExpense : Expense
     {
-        public LunchExpense(int amount) : base(amount, 2000)
+        public LunchExpense(int amount) : base(amount, "Lunch", 2000)
         {
         }
-
-        public override string getExpenseName() => "Lunch";
     }
 
     public class CarRentalExpense : Expense
     {
-        public CarRentalExpense(int amount) : base(amount)
+        public CarRentalExpense(int amount) : base(amount, "Car Rental")
         {
         }
-
-        public override string getExpenseName() => "Car Rental";
 
         public override int getMealExpense() => 0;
     }
