@@ -35,9 +35,9 @@ namespace Tests
 
             report.PrintReport(new List<Expense>()
                 {
-                    new Expense { amount = 1000, type = ExpenseType.BREAKFAST },
-                    new Expense { amount = 1, type = ExpenseType.CAR_RENTAL },
-                    new Expense { amount = 5000, type = ExpenseType.DINNER }
+                    new BreakfastExpense (  1000),
+                    new CarRentalExpense (  1),
+                    new DinnerExpense (  5000)
                 });
 
             Approvals.Verify(report.Output.ToString());
@@ -49,22 +49,22 @@ namespace Tests
             var report = new ExpenseReportFake();
 
             report.PrintReport(new List<Expense>()
-                {});
+            { });
 
             Approvals.Verify(report.Output.ToString());
         }
 
-/*
-        [Test]
-        public void ExpenseReport_PrintReport_NullList()
-        {
-            var report = new ExpenseReportFake();
+        /*
+                [Test]
+                public void ExpenseReport_PrintReport_NullList()
+                {
+                    var report = new ExpenseReportFake();
 
-            report.PrintReport(null);
+                    report.PrintReport(null);
 
-            Approvals.Verify(report.Output.ToString());
-        }
-        */
+                    Approvals.Verify(report.Output.ToString());
+                }
+                */
 
         [Test]
         public void ExpenseReport_PrintReport_OverExpenseDinner()
@@ -73,7 +73,7 @@ namespace Tests
 
             report.PrintReport(new List<Expense>()
                 {
-                    new Expense { amount = 5001, type = ExpenseType.DINNER }
+                    new DinnerExpense ( 5001)
                 });
 
             Approvals.Verify(report.Output.ToString());
@@ -86,7 +86,7 @@ namespace Tests
 
             report.PrintReport(new List<Expense>()
                 {
-                    new Expense { amount = 1001, type = ExpenseType.BREAKFAST }
+                    new BreakfastExpense (  1001)
                 });
 
             Approvals.Verify(report.Output.ToString());
@@ -99,7 +99,7 @@ namespace Tests
 
             report.PrintReport(new List<Expense>()
                 {
-                    new Expense { amount = int.MaxValue, type = ExpenseType.CAR_RENTAL }
+                    new CarRentalExpense (  int.MaxValue)
                 });
 
             Approvals.Verify(report.Output.ToString());

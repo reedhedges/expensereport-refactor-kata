@@ -9,10 +9,40 @@ namespace expensereport_csharp
         DINNER, BREAKFAST, CAR_RENTAL
     }
 
-    public class Expense
+
+    public abstract class Expense
     {
+        protected Expense(ExpenseType type, int amount)
+        {
+            this.type = type;
+            this.amount = amount;
+        }
+
         public ExpenseType type;
         public int amount;
+    }
+
+    public class DinnerExpense : Expense
+    {
+        public DinnerExpense(int amount) : base (ExpenseType.DINNER, amount)
+        {
+
+        }
+
+    }
+
+    public class BreakfastExpense : Expense
+    {
+        public BreakfastExpense(int amount) : base(ExpenseType.BREAKFAST, amount)
+        {
+        }
+    }
+
+    public class CarRentalExpense : Expense
+    {
+        public CarRentalExpense(int amount) : base(ExpenseType.CAR_RENTAL, amount)
+        {
+        }
     }
 
     public class ExpenseReport
