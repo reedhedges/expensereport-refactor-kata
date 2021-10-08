@@ -1,5 +1,6 @@
 ﻿ using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace expensereport_csharp
 {
@@ -16,6 +17,8 @@ namespace expensereport_csharp
 
     public class ExpenseReport
     {
+        public StringBuilder OutPut { get; } = new StringBuilder();
+
         public void PrintReport(List<Expense> expenses)
         {
             int total = 0;
@@ -58,5 +61,6 @@ namespace expensereport_csharp
             Console.WriteLine("Meal expenses: " + mealExpenses);
             Console.WriteLine("Total expenses: " + total);
         }
+
     }
 }
