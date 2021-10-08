@@ -19,10 +19,7 @@ namespace expensereport_csharp
 
         public abstract string getExpenseName();
 
-        public virtual int getMealExpense()
-        {
-            return amount;
-        }
+        public virtual int getMealExpense() => amount;
 
         public bool isOverexpensed() => expenseLimit >= 0 ? this.amount > this.expenseLimit : false;
     }
@@ -34,10 +31,7 @@ namespace expensereport_csharp
 
         }
 
-        public override string getExpenseName()
-        {
-            return "Dinner";
-        }
+        public override string getExpenseName() => "Dinner";
     }
 
     public class BreakfastExpense : Expense
@@ -46,10 +40,7 @@ namespace expensereport_csharp
         {
         }
 
-        public override string getExpenseName()
-        {
-            return "Breakfast";
-        }
+        public override string getExpenseName() => "Breakfast";
     }
 
     public class LunchExpense : Expense
@@ -58,10 +49,7 @@ namespace expensereport_csharp
         {
         }
 
-        public override string getExpenseName()
-        {
-            return "Lunch";
-        }
+        public override string getExpenseName() => "Lunch";
     }
 
     public class CarRentalExpense : Expense
@@ -70,15 +58,9 @@ namespace expensereport_csharp
         {
         }
 
-        public override string getExpenseName()
-        {
-            return "Car Rental";
-        }
+        public override string getExpenseName() => "Car Rental";
 
-        public override int getMealExpense()
-        {
-            return 0;
-        }
+        public override int getMealExpense() => 0;
     }
 
     public class ExpenseReport
