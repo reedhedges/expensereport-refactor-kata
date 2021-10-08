@@ -9,15 +9,15 @@ enum ExpenseType {
     CAR_RENTAL("Car Rental", Integer.MAX_VALUE);
 
     private final String expenseName;
-    private final int maxAmount;
+    private final int amountLimit;
 
-    ExpenseType(String expenseName, int maxAmount) {
+    ExpenseType(String expenseName, int amountLimit) {
         this.expenseName = expenseName;
-        this.maxAmount = maxAmount;
+        this.amountLimit = amountLimit;
     }
 
-    public int getMaxAmount() {
-        return maxAmount;
+    public int getAmountLimit() {
+        return amountLimit;
     }
 
     public String getExpenseName() {
@@ -34,7 +34,7 @@ class Expense {
     }
 
     boolean isOverLimit() {
-        return amount > type.getMaxAmount();
+        return amount > type.getAmountLimit();
     }
 }
 
@@ -48,7 +48,6 @@ public class ExpenseReport {
         int mealExpenses =  0;
 
         System.out.println("Expenses " + date);
-
 
         for (Expense expense : expenses) {
             if (expense.type == ExpenseType.DINNER || expense.type == ExpenseType.BREAKFAST) {
