@@ -1,0 +1,4 @@
+﻿Expenses 01.01.0001 00:00:00
+Car Rental	2147483647
+0
+Total expenses: 2147483647

@@ -61,6 +61,6 @@ namespace expensereport_csharp
         }
 
         protected virtual void WriteOutput(string message) => Console.WriteLine(message);
-        protected virtual DateTime GetCurrentDate() => DateTime.Now;
+        protected virtual string GetCurrentDate() => DateTime.Now.ToString();
     }
 }

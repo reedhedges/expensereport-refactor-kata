@@ -16,7 +16,7 @@ namespace Tests
         protected override void WriteOutput(string message) =>
             Output.AppendLine(message);
 
-        protected override DateTime GetCurrentDate() => DateTime.MinValue;
+        protected override string GetCurrentDate() => "01.01.0001 00:00:00";
     }
 
     [UseReporter(typeof(DiffReporter))]
@@ -105,6 +105,4 @@ namespace Tests
             Approvals.Verify(report.Output.ToString());
         }
     }
-
-
 }
