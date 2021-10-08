@@ -1,4 +1,4 @@
-﻿ using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,65 +6,62 @@ namespace expensereport_csharp
 {
     public abstract class Expense
     {
-        protected Expense( int amount)
+        protected Expense(int amount, int expenseLimit = -1)
         {
+            if (amount < 0) throw new ArgumentOutOfRangeException(nameof(amount));
+
             this.amount = amount;
+            this.expenseLimit = expenseLimit;
         }
 
         public int amount;
+        private readonly int expenseLimit;
 
         public abstract string getExpenseName();
 
-        public virtual int getMealExpense() {
+        public virtual int getMealExpense()
+        {
             return amount;
         }
 
-        public virtual bool isOverexpensed()
-        {
-            return false;
-        }
-
+        public bool isOverexpensed() => expenseLimit >= 0 ? this.amount > this.expenseLimit : false;
     }
 
     public class DinnerExpense : Expense
     {
-        public DinnerExpense(int amount) : base (amount)
+        public DinnerExpense(int amount) : base(amount, 5000)
         {
 
         }
 
-        public override string getExpenseName() {
+        public override string getExpenseName()
+        {
             return "Dinner";
         }
-
-        public override bool isOverexpensed() => this.amount > 5000;
-
     }
 
     public class BreakfastExpense : Expense
     {
-        public BreakfastExpense(int amount) : base(amount)
+        public BreakfastExpense(int amount) : base(amount, 1000)
         {
         }
 
-        public override string getExpenseName() {
+        public override string getExpenseName()
+        {
             return "Breakfast";
         }
-
-        public override bool isOverexpensed() => this.amount > 1000;
     }
 
     public class LunchExpense : Expense
     {
-        public LunchExpense(int amount) : base(amount)
+        public LunchExpense(int amount) : base(amount, 2000)
         {
         }
 
-        public override string getExpenseName() {
+        public override string getExpenseName()
+        {
             return "Lunch";
         }
-
-        public override bool isOverexpensed() => this.amount > 2000;
     }
 
     public class CarRentalExpense : Expense
@@ -73,11 +70,13 @@ namespace expensereport_csharp
         {
         }
 
-        public override string getExpenseName() {
+        public override string getExpenseName()
+        {
             return "Car Rental";
         }
 
-        public override int getMealExpense() {
+        public override int getMealExpense()
+        {
             return 0;
         }
     }
