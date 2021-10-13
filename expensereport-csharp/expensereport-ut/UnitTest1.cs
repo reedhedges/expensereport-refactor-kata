@@ -117,31 +117,23 @@ namespace Tests
         }
 
         [Test]
-        public void Expense_NegativeAmount_Throws()
-        {
-
-            Assert.Throws<ArgumentOutOfRangeException>(() => new BaseExpenseTest (-1, "base"));
-        }
+        public void Expense_NegativeAmount_Throws() 
+            => 
+            _ = Assert.Throws<ArgumentOutOfRangeException>(() => new BaseExpenseTest(-1, "base"));
 
         [Test]
-        public void Expense_NameNull_Throws()
-        {
-
-            Assert.Throws<ArgumentNullException>(() => new BaseExpenseTest (0, null));
-        }
+        public void Expense_NameNull_Throws() 
+            => 
+            _ = Assert.Throws<ArgumentNullException>(() => new BaseExpenseTest(0, null));
 
         [Test]
-        public void Expense_NameEmpty_Throws()
-        {
-
-            Assert.Throws<ArgumentNullException>(() => new BaseExpenseTest (0, ""));
-        }
+        public void Expense_NameEmpty_Throws() 
+            => 
+            _ = Assert.Throws<ArgumentNullException>(() => new BaseExpenseTest(0, ""));
 
         [Test]
-        public void Expense_NameWhiteSpace_Throws()
-        {
-
-            Assert.Throws<ArgumentNullException>(() => new BaseExpenseTest (0, "  "));
-        }
+        public void Expense_NameWhiteSpace_Throws() 
+            => 
+            _ = Assert.Throws<ArgumentNullException>(() => new BaseExpenseTest(0, "  "));
     }
 }
