@@ -1,35 +1,13 @@
 using ApprovalTests;
 using ApprovalTests.Reporters;
-using expensereport_csharp;
 using expensereport_csharp.ExpenseTypes;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Tests
 {
-
-    class ExpenseReportFake : ExpenseReport
-    {
-        public StringBuilder Output { get; } = new StringBuilder();
-
-        protected override void WriteOutput(string message) =>
-            Output.AppendLine(message);
-
-        protected override string GetCurrentDate() => "01.01.0001 00:00:00";
-    }
-
-    class BaseExpenseTest : Expense
-    {
-        public BaseExpenseTest(int amount, string name) : base(amount, name)
-        {
-
-        }
-    }
-
     [UseReporter(typeof(DiffReporter))]
-
     public class Tests
     {
         [SetUp]
