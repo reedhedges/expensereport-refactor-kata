@@ -64,18 +64,6 @@ namespace Tests
             Approvals.Verify(report.Output.ToString());
         }
 
-        /*
-                [Test]
-                public void ExpenseReport_PrintReport_NullList()
-                {
-                    var report = new ExpenseReportFake();
-
-                    report.PrintReport(null);
-
-                    Approvals.Verify(report.Output.ToString());
-                }
-                */
-
         [Test]
         public void ExpenseReport_PrintReport_OverExpenseDinner()
         {
