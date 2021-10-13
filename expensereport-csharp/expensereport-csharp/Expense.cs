@@ -17,10 +17,10 @@ namespace expensereport_csharp
         private readonly int _expenseLimit;
         private readonly string _name;
 
-        public string GetExpenseName() => this._name;
+        public string GetExpenseName() => _name;
 
         public virtual int GetMealExpense() => _amount;
 
-        public bool IsOverexpensed() => _expenseLimit >= 0 && this._amount > this._expenseLimit;
+        public bool IsOverexpensed() => _expenseLimit >= 0 && _amount > _expenseLimit;
     }
 }
