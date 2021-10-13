@@ -8,21 +8,17 @@ namespace expensereport_csharp
     {
         public void PrintReport(List<Expense> expenses)
         {
-            int total = 0;
-
             WriteOutput($"Expenses {GetCurrentDate()}");
 
             foreach (Expense expense in expenses)
             {
                 var mealOverExpensesMarker = expense.IsOverexpensed() ? "X" : " ";
 
-                total += expense.Amount;
-
                 WriteOutput($"{expense.GetExpenseName()}\t{ expense.Amount }\t{ mealOverExpensesMarker}");
             }
 
             WriteOutput($"Meal expenses:{expenses.Sum(e => e.GetMealExpense())}");
-            WriteOutput($"Total expenses: {total}");
+            WriteOutput($"Total expenses: {expenses.Sum(e => e.Amount)}");
         }
 
         protected virtual void WriteOutput(string message) => Console.WriteLine(message);
