@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 
 namespace expensereport_csharp
 {
@@ -12,7 +12,7 @@ namespace expensereport_csharp
             if (amount < 0) throw new ArgumentOutOfRangeException(nameof(amount));
 
             this.amount = amount;
-            this.name = String.IsNullOrWhiteSpace(name) ? throw new ArgumentNullException(nameof(name)) : name;
+            this.name = string.IsNullOrWhiteSpace(name) ? throw new ArgumentNullException(nameof(name)) : name;
             this.expenseLimit = expenseLimit;
         }
 
@@ -20,18 +20,17 @@ namespace expensereport_csharp
         private readonly int expenseLimit;
         private readonly string name;
 
-        public string getExpenseName() => this.name;
+        public string GetExpenseName() => this.name;
 
-        public virtual int getMealExpense() => amount;
+        public virtual int GetMealExpense() => amount;
 
-        public bool isOverexpensed() => expenseLimit >= 0 ? this.amount > this.expenseLimit : false;
+        public bool IsOverexpensed() => expenseLimit >= 0 ? this.amount > this.expenseLimit : false;
     }
 
     public class DinnerExpense : Expense
     {
         public DinnerExpense(int amount) : base(amount, "Dinner", 5000)
         {
-
         }
     }
 
@@ -55,7 +54,7 @@ namespace expensereport_csharp
         {
         }
 
-        public override int getMealExpense() => 0;
+        public override int GetMealExpense() => 0;
     }
     #endregion
 
@@ -70,12 +69,12 @@ namespace expensereport_csharp
 
             foreach (Expense expense in expenses)
             {
-                var mealOverExpensesMarker = expense.isOverexpensed() ? "X" : " ";
+                var mealOverExpensesMarker = expense.IsOverexpensed() ? "X" : " ";
 
-                mealExpenses += expense.getMealExpense();
+                mealExpenses += expense.GetMealExpense();
                 total += expense.amount;
 
-                WriteOutput($"{expense.getExpenseName()}\t{ expense.amount }\t{ mealOverExpensesMarker}");
+                WriteOutput($"{expense.GetExpenseName()}\t{ expense.amount }\t{ mealOverExpensesMarker}");
             }
 
             WriteOutput($"Meal expenses:{mealExpenses}");
