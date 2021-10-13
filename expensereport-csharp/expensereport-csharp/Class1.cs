@@ -24,7 +24,7 @@ namespace expensereport_csharp
 
         public virtual int GetMealExpense() => amount;
 
-        public bool IsOverexpensed() => expenseLimit >= 0 ? this.amount > this.expenseLimit : false;
+        public bool IsOverexpensed() => expenseLimit >= 0 && this.amount > this.expenseLimit;
     }
 
     public class DinnerExpense : Expense
