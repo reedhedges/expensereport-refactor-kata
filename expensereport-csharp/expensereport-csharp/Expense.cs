@@ -8,19 +8,20 @@ namespace expensereport_csharp
         {
             if (amount < 0) throw new ArgumentOutOfRangeException(nameof(amount));
 
-            _amount = amount;
+            Amount = amount;
             _name = string.IsNullOrWhiteSpace(name) ? throw new ArgumentNullException(nameof(name)) : name;
             _expenseLimit = expenseLimit;
         }
 
-        public int _amount;
         private readonly int _expenseLimit;
         private readonly string _name;
 
+        public int Amount { get; init; }
+
         public string GetExpenseName() => _name;
 
-        public virtual int GetMealExpense() => _amount;
+        public virtual int GetMealExpense() => Amount;
 
-        public bool IsOverexpensed() => _expenseLimit >= 0 && _amount > _expenseLimit;
+        public bool IsOverexpensed() => _expenseLimit >= 0 && Amount > _expenseLimit;
     }
 }

@@ -16,9 +16,9 @@ namespace expensereport_csharp
             {
                 var mealOverExpensesMarker = expense.IsOverexpensed() ? "X" : " ";
 
-                total += expense._amount;
+                total += expense.Amount;
 
-                WriteOutput($"{expense.GetExpenseName()}\t{ expense._amount }\t{ mealOverExpensesMarker}");
+                WriteOutput($"{expense.GetExpenseName()}\t{ expense.Amount }\t{ mealOverExpensesMarker}");
             }
 
             WriteOutput($"Meal expenses:{expenses.Sum(e => e.GetMealExpense())}");
