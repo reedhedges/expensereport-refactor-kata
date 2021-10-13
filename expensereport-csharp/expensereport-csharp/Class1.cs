@@ -12,9 +12,7 @@ namespace expensereport_csharp
 
             foreach (Expense expense in expenses)
             {
-                var mealOverExpensesMarker = expense.IsOverexpensed() ? "X" : " ";
-
-                WriteOutput($"{expense.GetExpenseName()}\t{ expense.Amount }\t{ mealOverExpensesMarker}");
+                WriteOutput($"{expense.GetExpenseName()}\t{ expense.Amount }\t{ (expense.IsOverexpensed() ? "X" : " ")}");
             }
 
             WriteOutput($"Meal expenses:{expenses.Sum(e => e.GetMealExpense())}");
