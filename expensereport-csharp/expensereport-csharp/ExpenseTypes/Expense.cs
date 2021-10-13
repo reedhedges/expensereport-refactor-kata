@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace expensereport_csharp
+namespace expensereport_csharp.ExpenseTypes
 {
     public abstract class Expense
     {

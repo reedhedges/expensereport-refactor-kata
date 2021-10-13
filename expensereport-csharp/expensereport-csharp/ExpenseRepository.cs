@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using expensereport_csharp.ExpenseTypes;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 

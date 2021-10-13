@@ -1,4 +1,6 @@
-﻿namespace expensereport_csharp
+﻿using expensereport_csharp.ExpenseTypes;
+
+namespace expensereport_csharp
 {
     public static class ExpenseFormatter
     {

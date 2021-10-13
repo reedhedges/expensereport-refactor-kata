@@ -1,6 +1,7 @@
 using ApprovalTests;
 using ApprovalTests.Reporters;
 using expensereport_csharp;
+using expensereport_csharp.ExpenseTypes;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;

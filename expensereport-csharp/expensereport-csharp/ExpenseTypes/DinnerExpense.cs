@@ -1,4 +1,4 @@
-﻿namespace expensereport_csharp
+﻿namespace expensereport_csharp.ExpenseTypes
 {
     public class DinnerExpense : Expense
     {
