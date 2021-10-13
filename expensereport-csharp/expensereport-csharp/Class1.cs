@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace expensereport_csharp
 {
@@ -8,7 +9,6 @@ namespace expensereport_csharp
         public void PrintReport(List<Expense> expenses)
         {
             int total = 0;
-            int mealExpenses = 0;
 
             WriteOutput($"Expenses {GetCurrentDate()}");
 
@@ -16,13 +16,12 @@ namespace expensereport_csharp
             {
                 var mealOverExpensesMarker = expense.IsOverexpensed() ? "X" : " ";
 
-                mealExpenses += expense.GetMealExpense();
                 total += expense._amount;
 
                 WriteOutput($"{expense.GetExpenseName()}\t{ expense._amount }\t{ mealOverExpensesMarker}");
             }
 
-            WriteOutput($"Meal expenses:{mealExpenses}");
+            WriteOutput($"Meal expenses:{expenses.Sum(e => e.GetMealExpense())}");
             WriteOutput($"Total expenses: {total}");
         }
 
