@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace expensereport_csharp
 {
@@ -9,38 +8,29 @@ namespace expensereport_csharp
         public void PrintReport(List<Expense> expenses)
         {
             var expenseRepo = new ExpenseRepository(expenses);
+
             PrintHeader();
+            PrintExpenseDetails(expenseRepo);
+            PrintTotals(expenseRepo);
+        }
 
-            PrintExpenseDetails(expenses);
-
-            WriteOutput($"Meal expenses:{expenses.Sum(e => e.GetMealExpense())}");
+        private void PrintTotals(ExpenseRepository expenseRepo)
+        {
+            WriteOutput($"Meal expenses:{expenseRepo.SumMealExpense()}");
             WriteOutput($"Total expenses: {expenseRepo.SumAmount()}");
         }
 
         private void PrintHeader() => WriteOutput($"Expenses {GetCurrentDate()}");
 
-        private void PrintExpenseDetails(List<Expense> expenses)
-            =>
-            expenses.ForEach(expense => WriteOutput(ExpenseFormatter.GetExpenseDetail(expense)));
+        private void PrintExpenseDetails(IEnumerable<Expense> expenses)
+        {
+            foreach (var exp in expenses)
+            {
+               WriteOutput(ExpenseFormatter.GetExpenseDetail(exp));
+            }
+        }
 
         protected virtual void WriteOutput(string message) => Console.WriteLine(message);
         protected virtual string GetCurrentDate() => DateTime.Now.ToString();
-    }
-
-    public static class ExpenseFormatter
-    {
-        public static string GetExpenseDetail(Expense expense) 
-            => 
-            $"{expense.GetExpenseName()}\t{ expense.Amount }\t{ (expense.IsOverexpensed() ? "X" : " ")}";
-    }
-
-    public class ExpenseRepository
-    {
-        private readonly IReadOnlyList<Expense> _expenses;
-
-        public ExpenseRepository(IReadOnlyList<Expense> expenses) => _expenses = expenses;
-
-        public int SumAmount() => _expenses.Sum(e => e.Amount);
-
     }
 }
