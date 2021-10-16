@@ -3,7 +3,9 @@ Dinner	5000
 Dinner	5001	X
 Breakfast	1000	 
 Breakfast	1001	X
+Lunch	2000	 
+Lunch	2001	X
 Car Rental	50	 
 Car Rental	2147483647	 
-Meal expenses: 12002
-Total expenses: -2147471597
+Meal expenses: 16003
+Total expenses: -2147467596
