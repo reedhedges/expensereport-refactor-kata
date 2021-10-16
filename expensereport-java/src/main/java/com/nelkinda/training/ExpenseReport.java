@@ -14,10 +14,14 @@ class Expense {
 
 public class ExpenseReport {
     public void printReport(List<Expense> expenses) {
+        printReport(expenses, new Date());
+    }
+
+    public void printReport(List<Expense> expenses, Date date) {
         int total = 0;
         int mealExpenses = 0;
 
-        System.out.println("Expenses " + new Date());
+        System.out.println("Expenses " + date);
 
         for (Expense expense : expenses) {
             if (expense.type == ExpenseType.DINNER || expense.type == ExpenseType.BREAKFAST) {
@@ -26,18 +30,20 @@ public class ExpenseReport {
 
             String expenseName = "";
             switch (expense.type) {
-            case DINNER:
-                expenseName = "Dinner";
-                break;
-            case BREAKFAST:
-                expenseName = "Breakfast";
-                break;
-            case CAR_RENTAL:
-                expenseName = "Car Rental";
-                break;
+                case DINNER:
+                    expenseName = "Dinner";
+                    break;
+                case BREAKFAST:
+                    expenseName = "Breakfast";
+                    break;
+                case CAR_RENTAL:
+                    expenseName = "Car Rental";
+                    break;
             }
 
-            String mealOverExpensesMarker = expense.type == ExpenseType.DINNER && expense.amount > 5000 || expense.type == ExpenseType.BREAKFAST && expense.amount > 1000 ? "X" : " ";
+            String mealOverExpensesMarker =
+                expense.type == ExpenseType.DINNER && expense.amount > 5000 ||
+                expense.type == ExpenseType.BREAKFAST && expense.amount > 1000 ? "X" : " ";
 
             System.out.println(expenseName + "\t" + expense.amount + "\t" + mealOverExpensesMarker);
 
