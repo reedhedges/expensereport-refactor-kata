@@ -27,14 +27,30 @@ enum ExpenseType {
         return meal;
     }
 
-    boolean isOverLimit(Expense expense) {
-        return expense.amount > limit;
+    int getLimit() {
+        return limit;
     }
 }
 
 class Expense {
     ExpenseType type;
     int amount;
+
+    String getName() {
+        return type.getName();
+    }
+
+    boolean isMeal() {
+        return type.isMeal();
+    }
+
+    boolean isOverLimit() {
+        return amount > type.getLimit();
+    }
+
+    int getAmount() {
+        return amount;
+    }
 }
 
 public class ExpenseReport {
@@ -49,13 +65,13 @@ public class ExpenseReport {
         System.out.println("Expenses " + date);
 
         for (Expense expense : expenses) {
-            if (expense.type.isMeal()) {
-                mealExpenses += expense.amount;
+            if (expense.isMeal()) {
+                mealExpenses += expense.getAmount();
             }
-            String expenseName = expense.type.getName();
-            String mealOverExpensesMarker = expense.type.isOverLimit(expense) ? "X" : " ";
-            System.out.println(expenseName + "\t" + expense.amount + "\t" + mealOverExpensesMarker);
-            total += expense.amount;
+            String expenseName = expense.getName();
+            String mealOverExpensesMarker = expense.isOverLimit() ? "X" : " ";
+            System.out.println(expenseName + "\t" + expense.getAmount() + "\t" + mealOverExpensesMarker);
+            total += expense.getAmount();
         }
 
         System.out.println("Meal expenses: " + mealExpenses);
