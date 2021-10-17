@@ -7,14 +7,13 @@ import org.junit.jupiter.api.Test;
 import java.io.ByteArrayOutputStream;
 import java.util.Collections;
 import java.util.Date;
-import java.util.List;
 
 class ExpenseReportTest {
     @Test
     void empty_report() {
         ByteArrayOutputStream output = new ApprovalUtilities().writeSystemOutToStringBuffer();
         ExpenseReport report = new ExpenseReport();
-        report.printReport(Collections.emptyList(), new Date(0));
+        report.printReport(new Expenses(), new Date(0));
         Approvals.verify(output);
     }
 
@@ -22,7 +21,7 @@ class ExpenseReportTest {
     void big_report() {
         ByteArrayOutputStream output = new ApprovalUtilities().writeSystemOutToStringBuffer();
         ExpenseReport report = new ExpenseReport();
-        List<Expense> expenses = List.of(
+        Expenses expenses = new Expenses(
             createExpense(ExpenseType.DINNER, 5000),
             createExpense(ExpenseType.DINNER, 5001),
             createExpense(ExpenseType.BREAKFAST, 1000),

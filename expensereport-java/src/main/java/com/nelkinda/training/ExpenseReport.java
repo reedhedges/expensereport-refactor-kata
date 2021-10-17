@@ -1,6 +1,9 @@
 package com.nelkinda.training;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 enum ExpenseType {
@@ -53,29 +56,55 @@ class Expense {
     }
 }
 
+class Expenses implements Iterable<Expense> {
+
+    private final List<Expense> expenseList = new ArrayList<>();
+
+    public Expenses() {
+    }
+
+    public Expenses(Expense... expenses) {
+        expenseList.addAll(Arrays.asList(expenses));
+    }
+
+    int getMealExpenses() {
+        return expenseList.stream()
+            .filter(Expense::isMeal)
+            .mapToInt(Expense::getAmount)
+            .sum();
+    }
+
+    int getTotal() {
+        return expenseList.stream()
+            .mapToInt(Expense::getAmount)
+            .sum();
+    }
+
+    @Override
+    public Iterator iterator() {
+        return expenseList.iterator();
+    }
+}
+
 public class ExpenseReport {
-    public void printReport(List<Expense> expenses) {
+    public void printReport(Expenses expenses) {
         printReport(expenses, new Date());
     }
 
-    public void printReport(List<Expense> expenses, Date date) {
-        int total = 0;
-        int mealExpenses = 0;
-
+    public void printReport(Expenses expenses, Date date) {
         System.out.println("Expenses " + date);
 
         for (Expense expense : expenses) {
-            if (expense.isMeal()) {
-                mealExpenses += expense.getAmount();
-            }
-            String expenseName = expense.getName();
-            String mealOverExpensesMarker = expense.isOverLimit() ? "X" : " ";
-            System.out.println(expenseName + "\t" + expense.getAmount() + "\t" + mealOverExpensesMarker);
-            total += expense.getAmount();
+            printSingleExpense(expense);
         }
 
-        System.out.println("Meal expenses: " + mealExpenses);
-        System.out.println("Total expenses: " + total);
+        System.out.println("Meal expenses: " + expenses.getMealExpenses());
+        System.out.println("Total expenses: " + expenses.getTotal());
+    }
+
+    private void printSingleExpense(Expense expense) {
+        String mealOverExpensesMarker = expense.isOverLimit() ? "X" : " ";
+        System.out.println(expense.getName() + "\t" + expense.getAmount() + "\t" + mealOverExpensesMarker);
     }
 
 }
