@@ -26,7 +26,7 @@ TEST_CASE("Empty")
     
     // Verify output of empty list:
     std::list<ExpenseReportKata::Expense> emptylist;
-    ExpenseReportKata::printReport(emptylist);
+    ExpenseReportKata::printReport(emptylist, std::chrono::time_point<std::chrono::system_clock>()); // use constant time value
     Approvals::verify(outsstream.str());
 
     // reset std::cout output buffer:

@@ -2,17 +2,18 @@
 #include <iostream>
 #include <iterator>
 #include <list>
+#include <optional>
 
 #include "ExpenseReport.h"
 
 using namespace ExpenseReportKata;
 
-void ExpenseReportKata::printReport(std::list<Expense> expenses)
+void ExpenseReportKata::printReport(std::list<Expense> expenses, std::optional<report_time_t> time_opt)
 {
     int total = 0;
     int mealExpenses = 0;
 
-    auto now = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+    const auto now = std::chrono::system_clock::to_time_t(time_opt ? *time_opt : std::chrono::system_clock::now());
     std::cout << "Expenses " << ctime(&now) << '\n';
 
     for (std::list<Expense>::iterator expense = expenses.begin(); expense != expenses.end(); ++expense) {

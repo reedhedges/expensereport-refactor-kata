@@ -1,4 +1,4 @@
-Expenses Fri Jan 28 18:39:23 2022
+Expenses Wed Dec 31 19:00:00 1969
 
 Meal expenses: 0
 Total expenses: 0
