@@ -3,9 +3,19 @@
 #include <iterator>
 #include <list>
 
-#include "ExpenseReport.h"
-
 using namespace std;
+
+enum Type
+{
+    BREAKFAST, DINNER, CAR_RENTAL
+};
+
+class Expense
+{
+    public:
+    Type type;
+    int amount;
+};
 
 void printReport(list<Expense> expenses)
 {
