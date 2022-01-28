@@ -1,0 +1,5 @@
+Expenses Fri Jan 28 18:39:23 2022
+
+Meal expenses: 0
+Total expenses: 0
+

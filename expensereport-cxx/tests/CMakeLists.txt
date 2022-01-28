@@ -6,7 +6,7 @@ function(add_approval_catch2_test name)
   target_compile_definitions(${name} PRIVATE -DAPPROVAL_TESTS_HIDE_DEPRECATED_CODE=1)
   #target_precompile_headers(${name} PRIVATE "catch.hpp" "ApprovalTests.hpp") # TODO make this work
   target_include_directories(${name} PRIVATE ${CMAKE_SOURCE_DIR})
-  target_link_libraries(${name} libExpenseReportKata)
+  target_link_libraries(${name} PRIVATE libExpenseReportKata)
   add_test(NAME ${name} COMMAND ${name})
 endfunction()
 

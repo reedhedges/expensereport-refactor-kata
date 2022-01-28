@@ -7,7 +7,7 @@
 
 using namespace ExpenseReportKata;
 
-void printReport(std::list<Expense> expenses)
+void ExpenseReportKata::printReport(std::list<Expense> expenses)
 {
     int total = 0;
     int mealExpenses = 0;
