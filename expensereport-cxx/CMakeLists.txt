@@ -1,0 +1,6 @@
+cmake_minimum_required(VERSION 3.18)
+project(ExpenseReportKata CXX)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+enable_testing()
+add_library(libExpenseReportKata STATIC ExpenseReport.cpp)
+add_subdirectory(tests)
