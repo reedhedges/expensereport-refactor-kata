@@ -13,9 +13,8 @@ enum Type
     BREAKFAST, DINNER, CAR_RENTAL
 };
 
-class Expense
+struct Expense
 {
-    public:
     Type type;
     int amount;
 };
