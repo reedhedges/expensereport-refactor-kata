@@ -1,0 +1,14 @@
+Expenses Wed Dec 31 19:00:00 1969
+
+Breakfast	1000	 
+Breakfast	1001	X
+Dinner	5000	 
+Dinner	5001	X
+Breakfast	0	 
+Dinner	0	 
+Car Rental	1000	 
+Car Rental	999999	 
+Car Rental	0	 
+Meal expenses: 12002
+Total expenses: 1013001
+

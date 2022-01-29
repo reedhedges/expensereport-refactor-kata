@@ -1,3 +1,4 @@
+set(CXX_STANDARD 20)
 
 function(add_approval_catch2_test name)
   # TODO develop a version of this function with more customizability (libraries, compiler flags, command line arguments when running test, etc.)

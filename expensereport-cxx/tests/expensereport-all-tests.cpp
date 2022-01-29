@@ -49,6 +49,23 @@ TEST_CASE("Empty")
 
 }
 
+TEST_CASE("Several")
+{
+    std::list<ExpenseReportKata::Expense> e;
+    e.push_back({.type = ExpenseReportKata::BREAKFAST,  .amount = 1000});
+    e.push_back({.type = ExpenseReportKata::BREAKFAST,  .amount = 1001});
+    e.push_back({.type = ExpenseReportKata::DINNER,     .amount = 5000});
+    e.push_back({.type = ExpenseReportKata::DINNER,     .amount = 5001});
+    e.push_back({.type = ExpenseReportKata::BREAKFAST,  .amount = 0});
+    e.push_back({.type = ExpenseReportKata::DINNER,     .amount = 0});
+    e.push_back({.type = ExpenseReportKata::CAR_RENTAL,  .amount = 1000});
+    e.push_back({.type = ExpenseReportKata::CAR_RENTAL,  .amount = 999999});
+    e.push_back({.type = ExpenseReportKata::CAR_RENTAL,  .amount = 0});
+
+    CaptureCout capt;
+    ExpenseReportKata::printReport(e, system_clock_zero);
+    Approvals::verify(capt.str());
+}
 
 
 
