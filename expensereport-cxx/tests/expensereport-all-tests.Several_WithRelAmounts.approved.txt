@@ -1,0 +1,11 @@
+Expenses Wed Dec 31 19:00:00 1969
+
+Breakfast	1000	 
+Breakfast	1001	X
+Dinner	5000	 
+Dinner	5001	X
+Lunch	2000	 
+Lunch	2001	X
+Meal expenses: 16003
+Total expenses: 16003
+
