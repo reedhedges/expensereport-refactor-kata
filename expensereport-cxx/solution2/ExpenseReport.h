@@ -34,32 +34,34 @@ enum TypeIndex {
     MAX_TYPE_INDEX = 3
 };
 
-// note: order in types array must match TypeIndex
-static constexpr std::array<Type, MAX_TYPE_INDEX+1> g_types {
-    Type{
-        .name = "Breakfast",
-        .limit = 1000,
-        .category = MEAL
-    },
-    Type{
-        .name = "Dinner",
-        .limit = 5000,
-        .category = MEAL
-    },
-    Type{
-        .name = "Lunch",
-        .limit = 2000,
-        .category = MEAL
-    },
-    Type{
-        .name = "Car Rental",
-        .limit = UINT_MAX,
-        .category = NONMEAL
-    }
-};
+namespace Private {
+    // note: order in types array must match TypeIndex
+    static constexpr std::array<Type, MAX_TYPE_INDEX+1> g_types {
+        Type{
+            .name = "Breakfast",
+            .limit = 1000,
+            .category = MEAL
+        },
+        Type{
+            .name = "Dinner",
+            .limit = 5000,
+            .category = MEAL
+        },
+        Type{
+            .name = "Lunch",
+            .limit = 2000,
+            .category = MEAL
+        },
+        Type{
+            .name = "Car Rental",
+            .limit = UINT_MAX,
+            .category = NONMEAL
+        }
+    };
+}
 
 static constexpr const Type& getType(TypeIndex t) {
-    return g_types[t];
+    return Private::g_types[t];
 }
 
 class Expense
@@ -69,7 +71,7 @@ private:
     unsigned int amount_;
 
 public:
-    constexpr Expense(TypeIndex t, unsigned int amt) : type_(g_types[t]), amount_(amt) {}
+    constexpr Expense(TypeIndex t, unsigned int amt) : type_(getType(t)), amount_(amt) {}
     constexpr unsigned int amount() const { return amount_; }
     constexpr bool aboveLimit() const { return amount_ > type_.limit; }
     constexpr std::string_view name() const { return type_.name; }
