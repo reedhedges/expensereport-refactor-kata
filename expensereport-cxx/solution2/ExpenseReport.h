@@ -81,14 +81,6 @@ using report_time_t = std::chrono::time_point<std::chrono::system_clock>;
 bool printReport(const std::list<Expense>& expenses, std::optional<report_time_t> time_opt = std::nullopt);
 
 
-
-struct Summary {
-    time_t time = 0;
-    unsigned long total = 0;
-    unsigned long mealExpenses = 0;
-    size_t numOverLimit = 0;
-};
-
 template<size_t N>
 constexpr unsigned long getTotal(const std::array<Expense, N>& expenses)
 {
