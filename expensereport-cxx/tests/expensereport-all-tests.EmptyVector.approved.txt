@@ -1,0 +1,5 @@
+Expenses Wed Dec 31 19:00:00 1969
+
+Meal expenses: 0
+Total expenses: 0
+

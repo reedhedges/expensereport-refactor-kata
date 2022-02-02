@@ -15,7 +15,7 @@ void ExpenseReportKata::printReport(const expense_list_t& expenses, std::optiona
     std::cout << "Expenses " << ctime(&now) << '\n';
 
     unsigned long total = 0;
-    unsigned long mealExpenses = 0;
+    unsigned long mealExpenses = 0; // todo this could be a generic map of category -> total, with category names in category subclasses, similar to expense types.
     for (auto i = expenses.cbegin(); i != expenses.cend(); ++i) {
         const Expense& expense = **i; // i is iterator to unique_ptr
         // todo guard against overflow in total and mealExpenses

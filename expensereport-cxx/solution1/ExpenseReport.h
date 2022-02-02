@@ -16,6 +16,7 @@ class Expense
 public:
     Expense(unsigned int amount) : amount_(amount) {}
     virtual ~Expense() = default;
+    // note default move and copy constructors and operators should still work I think, though could be deleted/overridden in derived types to prevent them from using them (will copy/move Exepense but not derived type)
     unsigned int amount() const { return amount_; }
     virtual std::string_view name() const { return "Unknown"; }
     virtual unsigned int limit() const { return UINT_MAX; }
@@ -62,7 +63,7 @@ public:
 };
 
 using report_time_t = std::chrono::time_point<std::chrono::system_clock>;
-using expense_list_t = std::list<std::unique_ptr<Expense>>;
+using expense_list_t = std::list<std::unique_ptr<Expense>>; // to make the expenses list parameter to printReport generic, probably need extensive template declarations or concepts?
 void printReport(const expense_list_t& expenses, std::optional<report_time_t> time_opt = std::nullopt);
 
 } // namespace ExpenseReportKata
