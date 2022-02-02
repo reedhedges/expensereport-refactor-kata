@@ -1,3 +1,5 @@
 *.[adios]
 build/
 .vscode/settings.json
+CMakeFiles/
+CMakeCache.txt
