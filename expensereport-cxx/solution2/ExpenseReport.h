@@ -116,6 +116,7 @@ bool printReport(const T& cont, std::optional<report_time_t> time_opt = std::nul
     return printReport(std::cbegin(cont), std::cend(cont), time_opt);
 }
 
+// todo allow other containers other than array: (e.g. implement with iterators, then add wrappers for array or non-array containers)
 template<size_t N>
 constexpr unsigned long getTotal(const std::array<Expense, N>& expenses)
 {
@@ -135,14 +136,20 @@ constexpr unsigned long getTotal(const std::array<Expense, N>& expenses)
 }
 
 template<size_t N>
-constexpr unsigned long getMealsTotal(const std::array<Expense, N>& expenses)
+constexpr unsigned long getCategoryTotal(const std::array<Expense, N>& expenses, Category category)
 {
-    return std::accumulate(expenses.cbegin(), expenses.cend(), 0UL, [](const auto sum, const Expense& next)
+    return std::accumulate(expenses.cbegin(), expenses.cend(), 0UL, [category](const auto sum, const Expense& next)
     {
-        if(next.category() == MEAL) return sum + next.amount();
+        if(next.category() == category) return sum + next.amount();
         return sum;
     }
     );
+}
+
+template<size_t N>
+constexpr unsigned long getMealsTotal(const std::array<Expense, N>& expenses)
+{
+    return getCategoryTotal(expenses, MEAL);
 }
 
 template<size_t N>

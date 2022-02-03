@@ -203,6 +203,7 @@ TEST_CASE("Several_WithFixedAmounts_Vector")
     Approvals::verify(capt.str());
 }
 
+#ifdef KATA_SOLUTION_2
 TEST_CASE("Several_WithRelAmounts") 
 {
     // This test will break if report changes, but not if limit values of types change, since we use values based on whatever the type's limit value is
@@ -227,11 +228,28 @@ TEST_CASE("Several_WithRelAmounts")
     ExpenseReportKata::printReport(e, system_clock_zero);
     Approvals::verify(capt.str());
 }
+#else
+TEST_CASE("Several_WithRelAmounts") 
+{
+    // This test will break if report changes, but not if limit values of types change, since we use values based on whatever the type's limit value is
+
+    std::list<Expense> e;
+    e.emplace_back(BREAKFAST, limit({.type=BREAKFAST, .amount=0}));
+    e.emplace_back(BREAKFAST, limit({.type=BREAKFAST, .amount=0}) + 1);
+    e.emplace_back(DINNER, limit({.type=DINNER, .amount=0}));
+    e.emplace_back(DINNER, limit({.type=DINNER, .amount=0}) + 1);
+    e.emplace_back(LUNCH, limit({.type=LUNCH, .amount=0}));
+    e.emplace_back(LUNCH, limit({.type=LUNCH, .amount=0}) + 1);
+
+    CaptureCout capt;
+    ExpenseReportKata::printReport(e, system_clock_zero);
+    Approvals::verify(capt.str());
+}
 
 #endif
+#endif
 
-
-#ifdef KATA_SOLUTION_2
+#ifdef KATA_SOLUTION_CONSTEXPR
 #include <array>
 TEST_CASE("Constexpr")
 {
