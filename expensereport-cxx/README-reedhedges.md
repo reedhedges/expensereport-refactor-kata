@@ -19,7 +19,7 @@ Solution2 instead stores, in each Expense instance, a pointer to a static expens
 
 Solution3 is a variation on Solution2. 
 
-Solution4 is a minimal version in which expense type specific logic is just extracted to functions.  (One other possible change to this is that one function returns a struct of expense type-specific information, resulting in one switch statement.)
+Solution4 is a minimal change in which expense type specific logic is just moved to a class (struct), where the expense type is checked and type specific information is initialized in the constructor, which should generally be inlined by the compiler (resulting in similar resulting compiled code as the original).  
 
 In addition, in all solutions, amount values have been changed to unsigned int.  In a real application, this API change could have a significant impact and possibly cause undetected problems, so I would be much more cautious about this change.
 

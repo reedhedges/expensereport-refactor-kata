@@ -32,45 +32,26 @@ enum Category
     MEAL, NONMEAL
 };
 
-// note these could also be member functions of Expense:
-
-constexpr unsigned int limit(const Expense& expense) {
-    switch (expense.type) {
-        case BREAKFAST:     return 1000;
-        case LUNCH:         return 2000;
-        case DINNER:        return 5000;
-        default:            return UINT_MAX;
+struct ExpenseTypeInfo {
+    unsigned int limit;
+    Category category;
+    std::string_view type_name;
+    constexpr ExpenseTypeInfo(Type type) {
+        switch(type) {
+            case BREAKFAST:
+                limit=1000; category=MEAL; type_name="Breakfast";
+                break;
+            case LUNCH:
+                limit=2000; category=MEAL; type_name="Lunch";
+                break;
+            case DINNER:
+                limit=5000; category=MEAL; type_name="Dinner";
+                break;
+            case CAR_RENTAL:
+                limit=UINT_MAX; category=NONMEAL; type_name="Car Rental";
+        }
     }
-}
-
-constexpr bool aboveLimit(const Expense& expense) {
-    return expense.amount > limit(expense);
-}
-
-constexpr bool category(const Expense& expense) {
-    switch (expense.type) {
-        case BREAKFAST:
-        case LUNCH:
-        case DINNER:
-            return MEAL;
-        default:    
-            return NONMEAL;
-    }
-}
-
-constexpr std::string_view name(const Expense& expense) {
-    switch (expense.type) {
-        case BREAKFAST:     return "Breakfast";
-        case LUNCH:         return "Lunch";
-        case DINNER:        return "Dinner";
-        case CAR_RENTAL:    return "Car Rental";
-    }
-    return "Unknown expense type";
-}
-
-unsigned int amount(const Expense& expense) {
-    return expense.amount;
-}
+};
 
 using report_time_t = std::chrono::time_point<std::chrono::system_clock>;
 
@@ -87,11 +68,12 @@ void printReport(const It begin, const It end, std::optional<report_time_t> time
     for (auto i = begin; i != end; ++i)
     {
         const auto& e = *i;
-        if (category(e) == MEAL) { // could also make generic map of category->categoryTotal.
-            mealExpenses += amount(e);
+        const ExpenseTypeInfo t(e.type); // should be inlined by optimizer
+        if (t.category == MEAL) { // could also make generic map of category->categoryTotal.
+            mealExpenses += e.amount;
         }
-        total += amount(e);
-        std::cout << name(e) << '\t' << amount(e) << '\t' << (aboveLimit(e) ? 'X' : ' ') << '\n';
+        total += e.amount;
+        std::cout << t.type_name << '\t' << e.amount << '\t' << (e.amount > t.limit ? 'X' : ' ') << '\n';
     }
 
     std::cout << "Meal expenses: " << mealExpenses << '\n';
