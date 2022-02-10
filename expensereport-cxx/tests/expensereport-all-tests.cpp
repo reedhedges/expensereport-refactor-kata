@@ -19,8 +19,7 @@ using namespace ApprovalTests;
 
 // During this object's lifetime, all output to std::cout will instead be stored in a stringstream within this object. Use str() to get this string.
 // Upon destruction, std::cout's output buffer is restored to its previous state (i.e. probably program stdout).
-// Another way to do this would be a function that takes a callable object, sets up the capture, invokes the callable, then resets the capture.
-// TODO Catch2 probably has a way to setup and tear down for tests as well.
+// Alternatively we could use one catch2 TEST_CASE that sets up the capturing, then multiple SECTIONs for each test.
 class CaptureCout {
     std::streambuf *orig_cout_buf;
     std::ostringstream outsstream;

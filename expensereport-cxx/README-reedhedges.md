@@ -19,7 +19,9 @@ Solution2 instead stores, in each Expense instance, a pointer to a static expens
 
 Solution3 is a variation on Solution2. 
 
-Solution4 is a minimal change in which expense type specific logic is just moved to a class (struct), where the expense type is checked and type specific information is initialized in the constructor, which should generally be inlined by the compiler (resulting in similar resulting compiled code as the original).  
+Solution4 is a minimal change in which expense type specific logic is just moved to a class (struct), where the expense type is checked and type specific information is initialized in the constructor, which should generally be inlined by the compiler (resulting in similar resulting compiled code as the original).  Storage is the same as original (amount plus type enum, 8 bytes on my system)
+
+Solution5 defines a base class that contains the expense amount, and some derived classes (not virtual) to represent the types and provide methods to return name and limit constant values.  `std::variant` is used to hold one of these types for each instance.   In this case, each expense object only needs to store one unsigned int value, plus `std::variant` overhead (only 8 bytes, same as original and solution 4), and each expense struct is a trivial struct with only a public unsigned int data member and constant functions.  The downside is that accessing one of the variants is more complex (requiring use of `std::visit` and lambda to return the desired value);  a set of functions is provide an easier API for retrieving the values.
 
 In addition, in all solutions, amount values have been changed to unsigned int.  In a real application, this API change could have a significant impact and possibly cause undetected problems, so I would be much more cautious about this change.
 
