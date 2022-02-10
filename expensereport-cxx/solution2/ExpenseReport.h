@@ -9,6 +9,7 @@
 #include <string_view>
 #include <algorithm>
 #include <numeric>
+#include <list>
 
 #define KATA_SOLUTION_2
 
@@ -80,6 +81,8 @@ public:
 };
 
 using report_time_t = std::chrono::time_point<std::chrono::system_clock>;
+
+using expense_list_t = std::list<Expense>;
 
 //bool printReport(const std::list<Expense>& expenses, std::optional<report_time_t> time_opt = std::nullopt);
 template <typename It>

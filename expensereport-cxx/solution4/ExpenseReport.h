@@ -7,6 +7,7 @@
 #include <string_view>
 #include <array>
 #include <climits>
+#include <list>
 
 #define KATA_SOLUTION_4
 #define KATA_SOLUTION_CONSTEXPR 
@@ -54,6 +55,8 @@ struct ExpenseTypeInfo {
 };
 
 using report_time_t = std::chrono::time_point<std::chrono::system_clock>;
+
+using expense_list_t = std::list<Expense>;
 
 // expenses must be an iterable container of Expense objects.
 template<typename It>

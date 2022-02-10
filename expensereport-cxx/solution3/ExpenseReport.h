@@ -7,6 +7,7 @@
 #include <array>
 #include <string_view>
 #include <climits>
+#include <list>
 
 #define KATA_SOLUTION_3
 
@@ -78,6 +79,8 @@ unsigned int amount(const Expense& expense) {
 }
 
 using report_time_t = std::chrono::time_point<std::chrono::system_clock>;
+
+using expense_list_t = std::list<Expense>;
 
 template<typename It>
 void printReport(const It begin, const It end, std::optional<report_time_t> time_opt = std::nullopt)
